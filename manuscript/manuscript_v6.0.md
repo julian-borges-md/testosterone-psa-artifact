@@ -92,16 +92,19 @@ Testosterone raises PSA, and much of its apparent cancer risk runs through that 
 
 **Declarations**
 
+**Ethical approval.** This study used fully deidentified, publicly available summary statistics from completed genetic association studies and published trial reports. It did not involve human subjects, identifiable private information, or any intervention. The author's institution has been asked to confirm the applicable determination; pending that confirmation the study is described as not constituting human subjects research rather than as carrying an institutional exemption determination.
+
 **Author contributions.** Julian Yin Vieira Borges (Conceptualization, Methodology, Software, Formal analysis, Data curation, Visualization, Writing original draft, Writing review and editing).
+
+**Supplementary data.** Supplementary material, comprising eight Methods sections and Tables S1 to S10, is available at the journal's website.
+
+**Conflict of interest.** None declared.
 
 **Funding.** No specific grant from any funding agency in the public, commercial, or not-for-profit sectors.
 
-**Conflicts of interest.** None declared.
-
 **Data availability.** All data analysed were obtained from publicly accessible repositories: the GWAS Catalog (GCST90012103, GCST90012109, GCST90012113, GCST90461907, GCST006085, GCST002783, GCST90019511, GCST90002238), FinnGen release 12, and the MRC IEU 1000 Genomes European reference panel. Randomized trial counts were taken from published articles and their open supplementary materials. Code, committed result tables, harmonised variant level inputs and figure data are at github.com/julian-borges-md/testosterone-psa-artifact under an MIT licence, at tag v6.0, with that tag archived at https://doi.org/10.5281/zenodo.23324219. No controlled access or patient identifiable data were used or redistributed.
 
-**Ethical approval.** This study used fully deidentified, publicly available summary statistics from completed genetic association studies and published trial reports. It did not involve human subjects, identifiable private information, or any intervention. The author's institution has been asked to confirm the applicable determination; pending that confirmation the study is described as not constituting human subjects research rather than as carrying an institutional exemption determination.
-
+**Use of Artificial intelligence (AI) tools.** Large language model assistants were used under the author's direction for literature retrieval, analysis code generation, numerical checking and manuscript drafting. No model was used to select analyses after seeing results and no model output was accepted without re-derivation from the committed data, which the assertion modules in the public analysis repository verify independently. The author is the sole author and takes full responsibility for the content.
 
 **References**
 

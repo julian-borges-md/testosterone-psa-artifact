@@ -2,11 +2,22 @@
 
 | File | Contents |
 |---|---|
-| `manuscript_v1.0.md` | Full manuscript source. Tables are `TABLE:` blocks, equations `EQ:` lines, figures `FIG:` lines, references `REF:` lines |
-| `build_docx.js` | Builds the submission Word file with the four figures embedded |
+| `manuscript_v6.0.md` | Main text, tables and figure legends. Markdown: pipe tables, `![](figure.png)` image references resolved against `figures/` |
+| `supplementary_v6.0.md` | Supplementary methods, tables S1 to S10 and the two supplementary figures |
+| `STROBE-MR_checklist.md` | Completed reporting checklist |
+| `title_page.md` | Title, author, correspondence, word and display item counts |
+| `cover_letter.md` | Cover letter, venue neutral |
+| `figure_alt_text.md` | Alt text and legends for both display figures |
+| `build.sh` | Builds the Word versions with pandoc |
 
 ```bash
-cd manuscript && npm install docx && node build_docx.js
+bash manuscript/build.sh            # writes build/*.docx
 ```
 
-Every number in the manuscript is asserted by `make verify` at the repository root. Items marked "to be confirmed" need the author's input before submission: funding, competing interests, the AI use statement, and the Zenodo DOI.
+Every number in these documents is asserted by `make verify` at the repository
+root, and `make submission` additionally asserts that no unresolved placeholder
+remains. The documents name the archival deposit the repository corresponds to,
+and `make manuscript` fails if that citation does not resolve to a version tag.
+
+The sources are venue neutral by design. Correspondence addressed to a specific
+journal is kept with the submission package rather than here.

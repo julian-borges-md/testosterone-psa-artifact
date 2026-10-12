@@ -25,7 +25,7 @@
 | 17 | Results of additional or sensitivity analyses | Results, Rival explanations excluded, Randomized trials show the same channel, and Lethal disease cannot be tested; Supplementary Tables S3, S4, S6, S7, S8 and S10 |
 | 18 | Key results in the context of the stated hypothesis | Discussion, opening two paragraphs. The prostate responds to testosterone across the sampled range, and once that PSA response is accounted for the apparent effect on prostate cancer is no longer distinguishable from the null though it is not shown to be zero |
 | 19 | Limitations, including assumption violations and the direction of bias | Discussion, Limitations; main Table 6 with 10 rows and the complete table at Supplementary Table S9 with 26 rows, each stating the expected direction of bias |
-| 20 | Interpretation, generalisability and funding | Discussion and Conclusion; Declarations, Funding, Conflicts of interest and Ethical approval |
+| 20 | Interpretation, generalisability and funding | Discussion and Conclusion; Declarations, Funding, Conflict of interest and Ethical approval |
 
 ## Items requiring specific comment
 

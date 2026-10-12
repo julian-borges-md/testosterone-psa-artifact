@@ -8,6 +8,7 @@
 #   make crossvalidate compare every estimator against a published package (needs R)
 #   make selftest      prove that verify fails on perturbed input
 #   make figures       regenerate the display figures from committed results
+#   make docx          build the Word versions of the documents (needs pandoc)
 #   make clean         remove generated artefacts
 #
 # verify and selftest need no network and no raw data. Both run in CI.
@@ -15,7 +16,7 @@
 
 PY := python3
 
-.PHONY: install verify matrix matrix-full manuscript submission crossvalidate selftest figures clean
+.PHONY: install verify matrix matrix-full manuscript submission crossvalidate selftest figures docx clean
 
 install:
 	$(PY) -m pip install -r requirements.txt
@@ -51,6 +52,9 @@ figures:
 	$(PY) figures/make_figures.py
 	$(PY) figures/make_figure_saturation_full.py
 	$(PY) figures/export_figure_data.py
+
+docx:
+	bash manuscript/build.sh
 
 clean:
 	find . -name __pycache__ -type d -exec rm -rf {} +

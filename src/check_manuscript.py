@@ -216,7 +216,7 @@ abstract_region = region("**Abstract**", "**Keywords:**")
 keymsg_region = region("**Key Messages**", "**Introduction**")
 disc_region = region("**Discussion**", "The dogma holds")
 results_region = region("**Results**", "**Discussion**")
-main_text = region("**Introduction**", "**Data availability.**")
+main_text = region("**Introduction**", "**Declarations**")
 
 # -- gate 2: claim consistency ---------------------------------------------
 # The limitations table denies that a linear instrumental variable average can
@@ -508,13 +508,17 @@ for tag in tags:
                      f"version tag, so the citation points at nothing")
 
 # -- journal limits ---------------------------------------------------------
-# Basis: Introduction through the end of the Discussion, excluding table rows
-# and display item captions. Calibrated against the independent count during development,
-# which read 41 words lower than this basis.
-BASIS_OFFSET = 41
+# Basis: Introduction through the start of the Declarations block, excluding
+# table rows and display item captions. The limit excludes the abstract, the key
+# messages, the declarations, the references, tables, figures and supplementary
+# material, and this region is exactly what is left. No offset is applied: an
+# earlier basis ran to the data availability statement and subtracted a
+# calibration constant, which counted part of the declarations as main text and
+# made the reported figure depend on the order of the declarations. Counting the
+# region itself cannot understate, which is the direction that matters.
 body = re.sub(r"^\|.*$", "", main_text, flags=re.M)
 body = re.sub(r"^\*\*(Table|Figure) \d.*$", "", body, flags=re.M)
-mw = len([w for w in re.split(r"\s+", re.sub(r"[*_#]", "", body)) if w.strip()]) - BASIS_OFFSET
+mw = len([w for w in re.split(r"\s+", re.sub(r"[*_#]", "", body)) if w.strip()])
 n += 1
 if mw > 3000:
     fails.append(f"journal limit: main text {mw} words exceeds the 3000 word limit")
