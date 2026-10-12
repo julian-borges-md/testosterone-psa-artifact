@@ -216,7 +216,7 @@ No controlled access or patient identifiable data is used or redistributed here.
 
 > Borges, Julian. *Testosterone raises PSA, and much of its apparent prostate cancer risk runs through that channel: a Mendelian randomization and Bayesian synthesis study.* 2026. https://github.com/julian-borges-md/testosterone-psa-artifact
 
-Archived at [https://doi.org/10.5281/zenodo.23324744](https://doi.org/10.5281/zenodo.23324744) (version v6.1). The concept DOI [10.5281/zenodo.23324218](https://doi.org/10.5281/zenodo.23324218) always resolves to the latest version. Machine readable metadata in [`CITATION.cff`](CITATION.cff).
+Archived at [https://doi.org/10.5281/zenodo.23326289](https://doi.org/10.5281/zenodo.23326289) (version v6.2). The concept DOI [10.5281/zenodo.23324218](https://doi.org/10.5281/zenodo.23324218) always resolves to the latest version. Machine readable metadata in [`CITATION.cff`](CITATION.cff).
 
 ---
 
