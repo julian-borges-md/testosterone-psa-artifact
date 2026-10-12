@@ -17,7 +17,7 @@ United States
 Email: jyborges@bu.edu
 ORCID: 0009-0001-9929-3135
 
-**Word counts.** Main text 2,992 words, against an Original Article limit of 3,000. Abstract 249 words excluding the four structured headings, against a limit of 250.
+**Word counts.** Main text 2,979 words, against an Original Article limit of 3,000. Abstract 249 words excluding the four structured headings, against a limit of 250.
 
 **Display items.** 6 tables and 2 figures, against a limit of 8 in total.
 
