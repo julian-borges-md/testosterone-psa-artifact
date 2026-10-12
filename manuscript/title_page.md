@@ -17,7 +17,7 @@ United States
 Email: jyborges@bu.edu
 ORCID: 0009-0001-9929-3135
 
-**Word counts.** Main text 2,983 words, against an Original Article limit of 3,000. Abstract 249 words excluding the four structured headings, against a limit of 250.
+**Word counts.** Main text 2,980 words, against an Original Article limit of 3,000. Abstract 249 words excluding the four structured headings, against a limit of 250.
 
 **Display items.** 6 tables and 2 figures, against a limit of 8 in total.
 
@@ -31,6 +31,6 @@ ORCID: 0009-0001-9929-3135
 
 **Reporting guideline.** STROBE-MR. The completed checklist is supplied as a separate file.
 
-**Data and code.** github.com/julian-borges-md/testosterone-psa-artifact at tag v6.0, under an MIT licence, with an archival Zenodo deposit of that tag.
+**Data and code.** github.com/julian-borges-md/testosterone-psa-artifact at tag v6.0, under an MIT licence, archived at https://doi.org/10.5281/zenodo.23324219.
 
 **Note on the counts above.** Every number on this page is asserted mechanically by `src/check_manuscript.py` in the analysis repository and is regenerated whenever the manuscript changes, so it cannot drift from the document it describes.

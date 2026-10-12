@@ -28,3 +28,11 @@ keywords:
   - detection bias
   - Bayesian synthesis
   - reproducibility
+doi: 10.5281/zenodo.23324219
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23324219
+    description: Archived snapshot of version v6.0
+  - type: doi
+    value: 10.5281/zenodo.23324218
+    description: Concept DOI, always resolves to the latest version
