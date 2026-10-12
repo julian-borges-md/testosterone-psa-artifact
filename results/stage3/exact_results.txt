@@ -1,0 +1,10 @@
+exact conditional MLE OR 0.890, profile 95% CI 0.504 to 1.563, events 24/4395 vs 26/4236
+                prior  post_OR    lo    hi  P_OR_gt1  P_OR_gt1_2
+                vague    0.888 0.502 1.565     0.340       0.149
+  face value MR, 1 SD    1.183 1.071 1.304     1.000       0.384
+  face value MR, 2 SD    1.349 1.117 1.630     0.999       0.889
+PSA adjusted MR, 1 SD    1.018 0.828 1.254     0.566       0.061
+PSA adjusted MR, 2 SD    1.003 0.708 1.424     0.506       0.159
+reverse Bayes exact: prior SD 0.144 (x0.5 of data) -> minimum prior median OR 1.34
+reverse Bayes exact: prior SD 0.288 (x1.0 of data) -> minimum prior median OR 2.20
+reverse Bayes exact: prior SD 0.577 (x2.0 of data) -> minimum prior median OR 13.34

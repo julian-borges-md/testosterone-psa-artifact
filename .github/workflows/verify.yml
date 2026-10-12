@@ -1,0 +1,82 @@
+name: verify
+
+# Re-derives every asserted number in the manuscript from the committed result
+# tables and from the committed harmonised variant level inputs, then proves the
+# check can fail. A red badge means the repository no longer agrees with the paper.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Re-derive asserted values
+        run: python src/verify.py
+      - name: Re-derive every cell of the estimator matrices
+        run: python src/verify_matrix.py
+      - name: Check the manuscript against the committed matrix
+        run: python src/check_manuscript.py manuscript/manuscript_v6.0.md
+      - name: Prove the check can fail
+        run: python src/selftest.py
+
+  monte-carlo:
+    # The bootstrap and data perturbation standard errors need several hundred
+    # refits per cell, so they are checked on demand and weekly rather than on
+    # every push.
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Re-derive the Monte Carlo standard errors
+        run: python src/verify_matrix.py --full
+
+  cross-validation:
+    # Re-derives the MR RAPS row from the published implementation and checks
+    # every closed form estimator against MendelianRandomization. Runs on
+    # dispatch and weekly rather than on every push, because the R toolchain
+    # takes several minutes to build.
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "4.3.3"
+      - name: System libraries
+        run: sudo apt-get update -qq && sudo apt-get install -y libgmp-dev libuv1-dev libcurl4-openssl-dev libssl-dev libxml2-dev
+      - name: Reference MR packages
+        # mr.raps 0.2 is archived on CRAN, so it is installed from the archive
+        # tarball and its only non base import, nortest, must be installed
+        # first. install.packages warns rather than errors on a failed source
+        # build, so the loads below are asserted explicitly: a silent install
+        # failure previously surfaced as "there is no package called mr.raps"
+        # twelve minutes into the job, in the wrong step.
+        run: |
+          Rscript -e 'install.packages(c("nortest","MendelianRandomization"), repos="https://cloud.r-project.org")'
+          Rscript -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/mr.raps/mr.raps_0.2.tar.gz", repos=NULL, type="source")'
+          Rscript -e 'for (p in c("nortest","MendelianRandomization","mr.raps")) if (!requireNamespace(p, quietly=TRUE)) stop(sprintf("install failed: %s", p)); cat("reference packages present:", paste(c("MendelianRandomization","mr.raps"), sapply(c("MendelianRandomization","mr.raps"), function(p) as.character(packageVersion(p))), collapse=" "), "\n")'
+      - name: Cross validate against published implementations
+        run: Rscript src/stage8_crossvalidation/crossvalidate.R
+      - name: Re-derive the adopted MR RAPS row
+        run: Rscript src/stage8_crossvalidation/raps_reference.R
+      - name: Loss sensitivity for every count that rests on the MR RAPS row
+        run: Rscript src/stage8_crossvalidation/raps_loss_class.R
+      - name: Confirm the committed matrix still matches
+        run: |
+          pip install -r requirements.txt
+          python src/verify_matrix.py

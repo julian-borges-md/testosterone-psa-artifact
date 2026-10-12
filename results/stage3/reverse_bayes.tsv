@@ -1,0 +1,13 @@
+data	prior_certainty	prior_SD	min_prior_median_OR	prior_95_lower
+Any prostate cancer, 41 RCTs	prior as informative as all trials	0.27194798934527986	2.1391997216809746	1.2553491463367723
+Any prostate cancer, 41 RCTs	prior twice as informative as all trials	0.13597399467263993	1.3257983768952901	1.0156266356496837
+Any prostate cancer, 41 RCTs	prior half as informative	0.5438959786905597	12.32691835955362	4.2450314880582
+Any prostate cancer, 41 RCTs	genetics informed: SD shift needed		7.333090128102966	
+Clinically significant, 41 RCTs	prior as informative as all trials	0.5416672793972095	3.119881048904647	1.079099619873544
+Clinically significant, 41 RCTs	prior twice as informative as all trials	0.27083363969860474	1.596013994864737	0.9386386800467976
+Clinically significant, 41 RCTs	prior half as informative	1.083334558794419	32.97134583253672	3.944424808186909
+Clinically significant, 41 RCTs	genetics informed: SD shift needed		23.066349195393542	
+High grade, TRAVERSE	prior as informative as all trials	0.7308242251553979	3.274339135057451	0.7816881341606471
+High grade, TRAVERSE	prior twice as informative as all trials	0.36541211257769896	1.7220519637265854	0.8413974329798521
+High grade, TRAVERSE	prior half as informative	1.4616484503107958	27.669084302882816	1.57693759802341
+High grade, TRAVERSE	genetics informed: SD shift needed		48.783366985863836	

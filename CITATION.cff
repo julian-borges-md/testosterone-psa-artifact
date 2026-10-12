@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this software or its results, please cite it as below."
+title: "Testosterone raises PSA, and much of its apparent prostate cancer risk runs through that channel: a Mendelian randomization and Bayesian synthesis study"
+abstract: >-
+  A Mendelian randomization and Bayesian evidence synthesis study. Using PSA as
+  an in vivo bioassay of prostatic androgen receptor signaling, it falsifies the
+  androgen saturation model, excludes reverse causation and metabolic
+  confounding, identifies a PSA driven detection signature across exposures and
+  cohorts, and shows that randomized trials of testosterone therapy double
+  prostate biopsies without increasing prostate cancer.
+type: software
+authors:
+  - family-names: Borges
+    given-names: Julian
+    orcid: "https://orcid.org/0009-0001-9929-3135"
+    email: jyborges@bu.edu
+    affiliation: "Department of Computer Science, Boston University"
+repository-code: "https://github.com/julian-borges-md/testosterone-psa-artifact"
+license: MIT
+version: 1.0.0
+date-released: "2026-10-11"
+keywords:
+  - testosterone
+  - prostate cancer
+  - PSA
+  - Mendelian randomization
+  - androgen saturation model
+  - detection bias
+  - Bayesian synthesis
+  - reproducibility

@@ -1,0 +1,19 @@
+# Submission targets that must never appear in this repository.
+#
+# This repository holds the analysis and the manuscript and is venue neutral.
+# Submission correspondence, which names a journal by nature, is kept outside
+# it.
+#
+# One token per line. Blank lines and lines beginning with # are ignored. A
+# token wrapped in / / is a regular expression. This list only grows: a venue
+# that has ever been a target must never silently reappear, even long after the
+# target has changed. src/check_manuscript.py reads this file and scans the
+# whole tracked tree against it on every push; this file is the only one exempt,
+# so that the scanning module is itself scanned.
+International Journal of Epidemiology
+manuscriptcentral
+ScholarOne
+Editorial Manager
+Oxford University Press
+Oxford Academic
+/\bIJE\b/

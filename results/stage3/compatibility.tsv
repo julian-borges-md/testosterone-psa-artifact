@@ -1,0 +1,8 @@
+trial_anchor	genetic_prior	z	p	live	note
+Zeng 2022 randomized trials only, RR 0.85 (0.44 to 1.62)	pooled PRACTICAL and FinnGen, 1 SD	0.8981215648806882	0.3691207433356125	True	
+Zeng 2022 randomized trials only, RR 0.85 (0.44 to 1.62)	PRACTICAL only, 1 SD	1.0068771903923848	0.3139937944753616	True	sensitivity prior
+Zeng 2022 randomized trials only, RR 0.85 (0.44 to 1.62)	PRACTICAL only, 2 SD	1.4802742221172824	0.13880007969280728	True	sensitivity prior
+41 trial exact conditional likelihood	face value, 1 SD	1.1	0.272	True	committed results/stage3/conflict.txt
+41 trial exact conditional likelihood	face value, 2 SD	1.65	0.098	True	committed results/stage3/conflict.txt
+Zeng 2022 all studies including cohorts, RR 0.62	face value, 1 SD	2.69	0.007	False	anchor withdrawn: pools non randomized cohorts
+Zeng 2022 all studies including cohorts, RR 0.62	face value, 2 SD	3.21	0.001	False	anchor withdrawn: pools non randomized cohorts

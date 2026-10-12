@@ -1,0 +1,9 @@
+Zeng 2022 all studies incl cohorts (RR 0.62) | 1 SD | face value | conflict z 2.69 p 0.007 | posterior OR 1.16 (1.05 to 1.28) P(>1.2) 0.242
+Zeng 2022 all studies incl cohorts (RR 0.62) | 1 SD | PSA adjusted | conflict z 1.96 p 0.049 | posterior OR 0.94 (0.77 to 1.16) P(>1.2) 0.010
+Zeng 2022 all studies incl cohorts (RR 0.62) | 2 SD | face value | conflict z 3.21 p 0.001 | posterior OR 1.25 (1.04 to 1.50) P(>1.2) 0.667
+Zeng 2022 all studies incl cohorts (RR 0.62) | 2 SD | PSA adjusted | conflict z 1.69 p 0.090 | posterior OR 0.83 (0.60 to 1.14) P(>1.2) 0.012
+Zeng 2022 RCTs only (RR 0.85) | 1 SD | face value | conflict z 1.01 p 0.314 | posterior OR 1.18 (1.07 to 1.31) P(>1.2) 0.391
+Zeng 2022 RCTs only (RR 0.85) | 1 SD | PSA adjusted | conflict z 0.58 p 0.565 | posterior OR 1.02 (0.82 to 1.26) P(>1.2) 0.064
+Zeng 2022 RCTs only (RR 0.85) | 2 SD | face value | conflict z 1.48 p 0.139 | posterior OR 1.36 (1.12 to 1.65) P(>1.2) 0.901
+Zeng 2022 RCTs only (RR 0.85) | 2 SD | PSA adjusted | conflict z 0.60 p 0.548 | posterior OR 1.00 (0.69 to 1.45) P(>1.2) 0.169
+Zeng biopsy RR 2.38 (1.01-5.60): log se 0.437, P(RR>1) under vague 0.976

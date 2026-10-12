@@ -1,0 +1,5 @@
+edge	label	evidence
+bioavailable testosterone -> prostate AR signaling / PSA	raises PSA	F1, Figure 2
+PSA -> biopsy -> diagnosed prostate cancer	detection channel	F9, Figure 4A
+BMI -> PSA	lowers PSA	F9a, Figure 3
+androgen signaling -> tumour initiation -> lethal cancer	not demonstrated	L2, untested

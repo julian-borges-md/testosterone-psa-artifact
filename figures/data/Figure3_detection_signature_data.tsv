@@ -1,0 +1,10 @@
+exposure	panel	estimate	lo	hi	p	nsnp	scale	source
+Bioavailable testosterone	Effect on PSA (log units)	0.084776410107816	0.0422639505743065	0.1272888696413256	9.285453335168282e-05	87	log units	stage1/mr_results.tsv
+Bioavailable testosterone	Prostate cancer, PRACTICAL (OR)	1.192630721617506	1.078979059046413	1.3182536085574845	0.0005653330314439	87	odds ratio	stage1/mr_results.tsv
+Bioavailable testosterone	Prostate cancer, FinnGen (OR)	1.053754047631514	0.9055153272951865	1.226260406012789	0.4984741249263049	82	odds ratio	stage1/mr_results.tsv
+BMI	Effect on PSA (log units)	-0.0936697982889022	-0.128081341446146	-0.0592582551316585	9.543411116599668e-08	78	log units	stage2/uni_metabolic_psa.tsv
+BMI	Prostate cancer, PRACTICAL (OR)	0.889647956558518	0.7997613790421627	0.9896370434349531	0.0314217750721795	78	odds ratio	stage2/uni_metabolic.tsv
+BMI	Prostate cancer, FinnGen (OR)	0.9274644951244032	0.8102775329467221	1.06159970471861	0.2745577084040076	76	odds ratio	stage2/uni_metabolic.tsv
+IGF-1	Effect on PSA (log units)	0.0032267365595169	-0.0172680295670006	0.0237215026860344	0.7576362581368139	353	log units	stage2/uni_metabolic_psa.tsv
+IGF-1	Prostate cancer, PRACTICAL (OR)	1.0591180389864565	0.9941195815095556	1.1283662864815374	0.0754889484491414	353	odds ratio	stage2/uni_metabolic.tsv
+IGF-1	Prostate cancer, FinnGen (OR)	1.095481904975637	1.0133963850553267	1.1842163854408576	0.0217401305603313	332	odds ratio	stage2/uni_metabolic.tsv

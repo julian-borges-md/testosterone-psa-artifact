@@ -1,0 +1,29 @@
+Formatting X1
+There are  2816644  variants.
+Removing  0  duplicated variants leaving  2816644 variants.
+No variants have illegal alleles.
+Removed  436406  variants with ambiguous strand.
+Flipping strand and effect allele so A1 is always A
+Returning  2380238  variants.
+Formatting X2
+There are  2852082  variants.
+Removing  0  duplicated variants leaving  2852082 variants.
+No variants have illegal alleles.
+Removed  443271  variants with ambiguous strand.
+Flipping strand and effect allele so A1 is always A
+Returning  2408811  variants.
+After merging and removing variants with inconsistent alleles,  there are  793712  variants that are present in both studies and can be used with CAUSE.
+           used  (Mb) gc trigger  (Mb)  max used   (Mb)
+Ncells  3025530 161.6   10201861 544.9   7027938  375.4
+Vcells 16671336 127.2  120992236 923.1 151234672 1153.9
+/tmp/gw/p6/biot_psa  variants for CAUSE:  1569 
+Estimating CAUSE posteriors using  1569  variants.
+===  /tmp/gw/p6/biot_psa  ===
+     model     gamma               eta                   q                  
+[1,] "Sharing" NA                  "0.19 (0.15, 0.24)"   "0.55 (0.39, 0.71)"
+[2,] "Causal"  "0.15 (0.12, 0.18)" "-0.3 (-0.41, -0.19)" "0.08 (0.02, 0.18)"
+[1] 0.0008650392
+   model1  model2 delta_elpd se_delta_elpd         z
+1    null sharing -37.223325      8.505601 -4.376331
+2    null  causal -42.646556      9.550874 -4.465199
+3 sharing  causal  -5.423231      1.730982 -3.133037

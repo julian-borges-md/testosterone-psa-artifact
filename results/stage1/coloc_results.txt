@@ -1,0 +1,2 @@
+FKBP4 region chr12:2.41-3.41Mb nsnp 3776 PP H0-H4 [0. 0. 0. 0. 1.] lead shared 12:2908330 p_biot 5.4e-310 p_psa 9.3e-24
+2p22 region chr2:31.48-32.48Mb nsnp 3148 PP H0-H4 [0.000e+00 1.000e-04 0.000e+00 1.980e-02 9.801e-01] lead shared 2:31982811 p_biot 1.6e-121 p_psa 1.2e-08

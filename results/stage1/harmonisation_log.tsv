@@ -1,0 +1,11 @@
+merged	allele_ok	pal_ok	eaf_ok	exposure	outcome	instruments
+93	93	87	87	biot	psa	93
+241	241	233	232	shbg	psa	241
+179	179	174	173	tt	psa	179
+93	93	87	87	biot	prac	93
+87	87	82	82	biot	fg	93
+241	241	233	232	shbg	prac	241
+179	179	174	174	tt	prac	179
+328	328	316	312	psa	prac	328
+311	309	298	294	psa	fg	328
+324	324	312	308	psa	biot	328

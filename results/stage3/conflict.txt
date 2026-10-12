@@ -1,0 +1,8 @@
+41 RCTs 1 SD face value conflict z 1.10 p 0.272
+41 RCTs 1 SD detection adjusted conflict z 0.57 p 0.570
+41 RCTs 2 SD face value conflict z 1.65 p 0.098
+41 RCTs 2 SD detection adjusted conflict z 0.58 p 0.559
+Zeng 2022 1 SD face value conflict z 2.69 p 0.007
+Zeng 2022 1 SD detection adjusted conflict z 1.96 p 0.049
+Zeng 2022 2 SD face value conflict z 3.21 p 0.001
+Zeng 2022 2 SD detection adjusted conflict z 1.69 p 0.090
