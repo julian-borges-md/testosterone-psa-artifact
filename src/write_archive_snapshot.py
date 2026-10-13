@@ -17,9 +17,20 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# The documents a reader reaches by following the citation, plus what produces
+# the display items they will compare against the submitted figures. The
+# figures themselves are not listed: a matplotlib PDF embeds its creation time,
+# so its hash moves on every regeneration and would report drift that is not
+# there. The script and the exported plotted values are what make a figure
+# reproducible, and both are stable text.
 COVERED = ["manuscript/manuscript_v6.0.md",
            "manuscript/supplementary_v6.0.md",
-           "manuscript/STROBE-MR_checklist.md"]
+           "manuscript/STROBE-MR_checklist.md",
+           "figures/make_figures.py",
+           "figures/make_figure_saturation_full.py",
+           "figures/data/Figure1_saturation_full_matrix_data.tsv",
+           "figures/data/Figure4A_trial_inputs.tsv",
+           "figures/data/Figure4B_posterior_curves.tsv"]
 
 
 def masked(path):

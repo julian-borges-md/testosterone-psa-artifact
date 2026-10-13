@@ -3,8 +3,13 @@
 # Hashes are of the file with every DOI and version tag masked, so the
 # commit that updates the citation after the tag is cut cannot register
 # as drift while any other change does.
-tag	v6.3
-version_doi	10.5281/zenodo.23351818
+tag	v6.4
+version_doi	10.5281/zenodo.23352541
 file	manuscript/manuscript_v6.0.md	c6782618ca8e517a426ceb8a52b78e84a0e2fb79d58a1ded3eb4e877cc5c3744
 file	manuscript/supplementary_v6.0.md	ecc9f8ac2064388227b94bebd6caa6a4fc122df66dec9b22d9eeb554ce5bf913
 file	manuscript/STROBE-MR_checklist.md	e83557f0d080a6834cf85814893864b108ef986eb3acbe4ba9e4c7dc576cfbf5
+file	figures/make_figures.py	c9d840220aa967a67dcdbca2f47febb1ec409911f3cd5bc53c9088e1200b33ff
+file	figures/make_figure_saturation_full.py	e69afc855bc5b7ae91e77c5170f81ec6aecbf323d655a30b088f0000739c64ed
+file	figures/data/Figure1_saturation_full_matrix_data.tsv	e18ab48defa4e85dc24a3543768f2cb664916782486070bd3f432c4f907ba390
+file	figures/data/Figure4A_trial_inputs.tsv	aeeb378c855a24a16a035f82f7fb4c047bd9b6f290dad6e2c44e4cbd1005c52c
+file	figures/data/Figure4B_posterior_curves.tsv	c49ff72f75be9c9775472c10435ebcb045ddfe3df12569aa5763edc5bab0c58a
