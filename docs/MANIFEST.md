@@ -6,7 +6,7 @@ Every claim maps to a command and an expected value. `make verify` checks all of
 
 | # | Claim | Command | Expected |
 |---|---|---|---|
-| F1 | Bioavailable testosterone raises PSA (saturation falsified) | `make verify` (F1a to F1c) | IVW 0.085, weighted median 0.130, weighted mode 0.149 |
+| F1 | Bioavailable testosterone raises PSA across the sampled range, which bounds the saturation model rather than refuting it | `make verify` (F1a to F1c) | IVW 0.085, weighted median 0.130, weighted mode 0.149 |
 | F2 | Prostate reads bioavailable, not total, testosterone | `make verify` (F2a, F2b) | Total testosterone 0.010; SHBG minus 0.076 |
 | F3 | Cancer association in PRACTICAL, not FinnGen | `make verify` (F3a, F3b) | OR 1.19 and 1.05 |
 | F4 | About half of the association runs through PSA | `make verify` (F4a, F4b) | Direct OR 1.04; PSA share 0.50 |

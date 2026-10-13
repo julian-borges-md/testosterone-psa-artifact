@@ -23,7 +23,7 @@ box(1.1,3.5,'Bioavailable\ntestosterone','#dbe5f1'); box(3.6,3.5,'Prostate AR\ns
 box(6.4,4.3,'PSA','#fde9d9'); box(9.2,4.3,'Biopsy','#fde9d9'); box(9.2,2.6,'Diagnosed\nprostate cancer','#f2f2f2')
 box(6.4,1.4,'Tumor initiation\nor progression','#e2efda'); box(9.2,1.0,'Lethal prostate\ncancer','#e2efda')
 box(1.1,1.6,'BMI\n(hemodilution)','#ebf1de')
-arr((2.05,3.5),(2.65,3.5)); arr((4.55,3.75),(5.45,4.2)); ax.text(4.75,4.35,'raises PSA\n(saturation falsified)',ha='center',fontsize=7,color='#1f4e79')
+arr((2.05,3.5),(2.65,3.5)); arr((4.55,3.75),(5.45,4.2)); ax.text(4.75,4.35,'raises PSA\n(saturation bounded)',ha='center',fontsize=7,color='#1f4e79')
 arr((7.35,4.3),(8.25,4.3),c='#c00000'); arr((9.2,3.92),(9.2,2.98),c='#c00000'); ax.text(9.35,3.45,'detection',fontsize=7,color='#c00000')
 arr((4.4,3.12),(5.6,1.75),c='#548235',ls='--'); ax.text(4.55,2.3,'biology?',fontsize=7,color='#548235')
 arr((7.35,1.6),(8.25,2.35),c='#548235',ls='--'); arr((7.35,1.2),(8.25,1.0),c='#548235',ls='--')
@@ -67,7 +67,11 @@ plt.tight_layout(); plt.savefig('figures/Figure3_detection_signature.png'); plt.
 
 # ---------- Figure 4: trials and synthesis ----------
 fig,axs=plt.subplots(1,2,figsize=(7.2,2.9),gridspec_kw={'width_ratios':[1,1.3]})
-ax=axs[0]; tr=[('Prostate biopsies',2.38,1.01,5.60,'#c00000'),('Prostate cancer',0.85,0.44,1.62,'#1f4e79')]
+# Submitted figure, so greyscale: the journal charges per colour figure and
+# will not convert after acceptance. Both rows are labelled on the y axis,
+# and in panel B the two series are separated by line style as well as by
+# the legend, so nothing here depended on the ink.
+ax=axs[0]; tr=[('Prostate biopsies',2.38,1.01,5.60,'black'),('Prostate cancer',0.85,0.44,1.62,'black')]
 for yi,(lab,b,lo,hi,c) in zip([1,0],tr): ax.errorbar(b,yi,xerr=[[b-lo],[hi-b]],fmt='s',color=c,ms=6,capsize=3,lw=1.4)
 ax.axvline(1,color='black',lw=0.8,ls=':'); ax.set_xscale('log')
 # On a log axis spanning about one decade matplotlib also labels the MINOR
@@ -80,9 +84,9 @@ ax.xaxis.set_minor_locator(NullLocator()); ax.xaxis.set_minor_formatter(NullForm
 ax.set_xlim(0.38, 6.6)
 ax.set_yticks([1,0]); ax.set_yticklabels([t[0] for t in tr]); ax.set_ylim(-0.6,1.6); ax.set_xlabel('Relative risk, randomized trials (95% CI)'); ax.set_title('A. Testosterone therapy in trials',fontsize=8,loc='left')
 ax=axs[1]; d=S
-for pr,c,lab in [('face value, pooled PRACTICAL+FinnGen','#7f7f7f','Genetics at face value'),('PSA channel removed, pooled','#1f4e79','Genetics, PSA channel removed')]:
-    q=d[d.prior==pr]; ax.plot(q.shift_SD,q.post_OR,'-o',color=c,ms=3,label=lab); ax.fill_between(q.shift_SD,q.lo,q.hi,color=c,alpha=0.15)
-ax.axhline(1,color='black',lw=0.8,ls=':'); ax.axhline(1.2,color='#c00000',lw=0.7,ls='--'); ax.text(0.55,1.22,'meaningful harm (OR 1.2)',fontsize=7,color='#c00000',
+for pr,c,sty,lab in [('face value, pooled PRACTICAL+FinnGen','#808080','-o','Genetics at face value'),('PSA channel removed, pooled','black','--s','Genetics, PSA channel removed')]:
+    q=d[d.prior==pr]; ax.plot(q.shift_SD,q.post_OR,sty,color=c,ms=3,label=lab); ax.fill_between(q.shift_SD,q.lo,q.hi,color=c,alpha=0.15)
+ax.axhline(1,color='black',lw=0.8,ls=':'); ax.axhline(1.2,color='black',lw=0.7,ls='-.'); ax.text(0.55,1.22,'meaningful harm (OR 1.2)',fontsize=7,color='black',
         bbox=dict(facecolor='white',edgecolor='none',pad=1.0))
 ax.set_xlabel('Assumed therapy shift (SD)'); ax.set_ylabel('Posterior OR, any prostate cancer'); ax.legend(fontsize=7,frameon=False,loc='upper left')
 ax.set_title('B. Bayesian synthesis with 41 trials',fontsize=8,loc='left')

@@ -9,7 +9,10 @@ import numpy as np, pandas as pd
 plt.rcParams.update({'font.family': 'DejaVu Sans', 'font.size': 8.5,
                      'axes.spines.top': False, 'axes.spines.right': False,
                      'savefig.dpi': 300})
-C = {'biot': '#1f4e79', 'tt': '#7f7f7f', 'shbg': '#c55a11'}
+# Submitted figure, so greyscale: the journal charges per colour figure.
+# One ink loses nothing here because each exposure has its own titled
+# panel, and significance is carried by the filled against open marker.
+C = {'biot': 'black', 'tt': 'black', 'shbg': 'black'}
 M = pd.read_csv('results/stage7_matrix/estimator_matrix.tsv', sep='\t')
 EST = ['IVW', 'MR Egger', 'Weighted median', 'Weighted mode',
        'IVW, Q outliers removed', 'MR cML BIC (DP SE)', 'MR RAPS Huber']

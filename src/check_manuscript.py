@@ -501,9 +501,25 @@ for rel in COMPANIONS:
 # the paragraph above the findings table ends "does not claim it", so every
 # claim in the first row of that table inherited a negation from a different
 # sentence. A negation only qualifies the clause it is in.
+# Coverage is the documents a reader reaches, which is wider than the ones that
+# travel with the submission: the repository front page, the manifest in docs
+# and the figure scripts all carried the claim too, and the figure scripts
+# print their text into a published image.
+#
+# prespecification/ is deliberately NOT covered. It records what was decided
+# before estimation, in the words used then, including a decision rule written
+# as "Saturation FALSIFIED if ...". Editing that to match what the analysis
+# later supported would not be correcting a claim, it would be falsifying the
+# record of the claim. A prespecification is evidence, not prose, and this gate
+# must never be the reason someone rewrites one.
 POLARITY = ["manuscript/manuscript_v6.0.md", "manuscript/supplementary_v6.0.md",
             "manuscript/STROBE-MR_checklist.md", "manuscript/cover_letter.md",
             "CITATION.cff", "README.md"]
+for _d, _ext in (("docs", ".md"), ("figures", ".py")):
+    _full = os.path.join(ROOT, _d)
+    if os.path.isdir(_full):
+        POLARITY += [os.path.join(_d, f) for f in sorted(os.listdir(_full))
+                     if f.endswith(_ext)]
 TOKEN = re.compile(r"falsif\w*", re.I)
 SUBJECT = re.compile(r"saturation|saturated|threshold model|central prediction", re.I)
 NEGATOR = re.compile(r"\bnot\b|\bno\b|\bcannot\b|\bnever\b|\bdenies\b|\bdenied\b|"
