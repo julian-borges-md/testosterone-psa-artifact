@@ -51,6 +51,11 @@ agrees with the computation and with itself.
    the detection half of the conclusion and drops the limit is a stronger paper
    than the one submitted.
 
+11. Archive content. The documents the cited deposit is supposed to contain are
+   unchanged since it was cut, recorded in docs/archive_snapshot.tsv. Gate 8
+   checks that the citation has the shape of a tag; this checks that the tag
+   holds this manuscript, which is the failure that actually occurred.
+
 Journal limits are asserted on a documented basis. With --submission, the module
 additionally asserts that no unresolved placeholder remains; that gate is a
 submission precondition and deliberately does not run on every push, so that a
@@ -59,6 +64,7 @@ known pending item does not mask a real regression in continuous integration.
 usage: python3 src/check_manuscript.py path/to/manuscript.md [--submission]
 """
 
+import hashlib
 import os
 import re
 import sys
@@ -629,6 +635,70 @@ for tag in tags:
     if not re.fullmatch(r"v\d+\.\d+(\.\d+)?", tag):
         fails.append(f"archive citation: {tag!r} is cited as a tag but is not a "
                      f"version tag, so the citation points at nothing")
+
+# -- gate 11: the cited archive contains this manuscript --------------------
+# Gate 8 asserts that the tag citation has the shape of a tag. It does not
+# assert that the tag contains this manuscript, and twice now it has not: a tag
+# was cut, the manuscript was then corrected, and the citation went on naming a
+# deposit holding a different document, the second time with a different title.
+# A reader who follows the DOI is entitled to the document that cites it. The
+# condition is recorded as data by src/write_archive_snapshot.py and checked
+# here.
+#
+# Hashes are taken with every DOI and version tag masked. The commit that
+# updates the citation after a tag is cut cannot be inside that tag, so it is
+# the one permitted difference between the deposit and the submitted document,
+# and masking is what permits exactly it and nothing else. The verification
+# modules are deliberately outside the coverage: this gate ships in that same
+# post tag commit, so its own recorded hash would be stale by construction.
+# Drift in them is caught by continuous integration on every push instead.
+SNAP = os.path.join(ROOT, "docs", "archive_snapshot.tsv")
+n += 1
+if not os.path.exists(SNAP):
+    fails.append("archive snapshot: docs/archive_snapshot.tsv is absent, so the "
+                 "deposit the manuscript cites cannot be checked against the "
+                 "documents it is supposed to contain")
+else:
+    snap_tag = snap_doi = None
+    recorded = []
+    for raw in open(SNAP, encoding="utf-8"):
+        line = raw.rstrip("\n")
+        if not line.strip() or line.startswith("#"):
+            continue
+        parts = line.split("\t")
+        if parts[0] == "tag":
+            snap_tag = parts[1].strip()
+        elif parts[0] == "version_doi":
+            snap_doi = parts[1].strip()
+        elif parts[0] == "file" and len(parts) >= 3:
+            recorded.append((parts[1].strip(), parts[2].strip()))
+    n += 1
+    if snap_tag not in tags:
+        fails.append(f"archive snapshot: the manuscript cites tag {tags!r} while "
+                     f"the deposit on record is {snap_tag!r}")
+    n += 1
+    if not snap_doi or snap_doi not in text:
+        fails.append(f"archive snapshot: the manuscript does not cite {snap_doi!r}, "
+                     f"which is the DOI of the deposit on record")
+    n += 1
+    if not recorded:
+        fails.append("archive snapshot: the record names no document, so it "
+                     "asserts nothing")
+    for rel, want in recorded:
+        n += 1
+        path = os.path.join(ROOT, rel)
+        if not os.path.exists(path):
+            fails.append(f"archive snapshot: {rel} is recorded as part of the "
+                         f"deposit and is missing from the tree")
+            continue
+        body = open(path, encoding="utf-8").read()
+        body = re.sub(r"10\.5281/zenodo\.\d+", "<DOI>", body)
+        body = re.sub(r"\bv\d+\.\d+(\.\d+)?\b", "<TAG>", body)
+        if hashlib.sha256(body.encode("utf-8")).hexdigest() != want:
+            fails.append(f"archive snapshot: {rel} has changed since the deposit "
+                         f"the manuscript cites was cut, so the cited DOI points "
+                         f"at a different document. Cut a release and run "
+                         f"make archive-snapshot TAG=... DOI=...")
 
 # -- journal limits ---------------------------------------------------------
 # Basis: Introduction through the start of the Declarations block, excluding

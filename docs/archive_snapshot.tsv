@@ -1,0 +1,10 @@
+# What the archival deposit the manuscript cites contains.
+# Regenerate with: make archive-snapshot TAG=vX.Y DOI=10.5281/zenodo.N
+# Hashes are of the file with every DOI and version tag masked, so the
+# commit that updates the citation after the tag is cut cannot register
+# as drift while any other change does.
+tag	v6.3
+version_doi	10.5281/zenodo.23351818
+file	manuscript/manuscript_v6.0.md	c6782618ca8e517a426ceb8a52b78e84a0e2fb79d58a1ded3eb4e877cc5c3744
+file	manuscript/supplementary_v6.0.md	ecc9f8ac2064388227b94bebd6caa6a4fc122df66dec9b22d9eeb554ce5bf913
+file	manuscript/STROBE-MR_checklist.md	e83557f0d080a6834cf85814893864b108ef986eb3acbe4ba9e4c7dc576cfbf5
