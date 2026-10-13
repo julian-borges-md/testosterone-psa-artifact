@@ -17,3 +17,8 @@ Editorial Manager
 Oxford University Press
 Oxford Academic
 /\bIJE\b/
+Journal of Clinical Endocrinology
+JCEM
+Endocrine Society
+editorialmanager
+clinem

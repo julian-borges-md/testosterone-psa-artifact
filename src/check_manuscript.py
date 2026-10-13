@@ -60,6 +60,18 @@ C = pd.read_csv(os.path.join(ROOT, "results", "stage7_matrix",
                              "contrast_biot_minus_tt.tsv"), sep="\t")
 text = open(MS).read()
 
+# Journal limits are a property of the venue, not of the manuscript, so they are
+# committed as data rather than written into this module. A null means the
+# journal publishes no limit for that item, and the check is then not run.
+LIMITS = {"main_text_words": None, "abstract_words": 250, "title_characters": None}
+_lim = os.path.join(ROOT, "docs", "journal_limits.tsv")
+if os.path.exists(_lim):
+    with open(_lim) as fh:
+        for line in fh:
+            if line.strip() and not line.startswith("#"):
+                k, v = line.split("\t")[:2]
+                LIMITS[k.strip()] = int(v) if v.strip().isdigit() else None
+
 ROWMAP = {
     "IVW": "IVW",
     "MR Egger": "MR Egger",
@@ -213,10 +225,16 @@ def region(start, end):
 
 
 abstract_region = region("**Abstract**", "**Keywords:**")
-keymsg_region = region("**Key Messages**", "**Introduction**")
+# The Key Messages element belongs to a journal that requires it. Where the
+# target journal has no such element the region is empty, and the claim
+# consistency gate runs over the regions that do exist rather than failing.
+keymsg_region = (region("**Key Messages**", "**Introduction**")
+                 if "**Key Messages**" in text else "")
 disc_region = region("**Discussion**", "The dogma holds")
 results_region = region("**Results**", "**Discussion**")
-main_text = region("**Introduction**", "**Declarations**")
+main_text = region("**Introduction**",
+                   "**Acknowledgments**" if "**Acknowledgments**" in text
+                   else "**Declarations**")
 
 # -- gate 2: claim consistency ---------------------------------------------
 # The limitations table denies that a linear instrumental variable average can
@@ -520,15 +538,22 @@ body = re.sub(r"^\|.*$", "", main_text, flags=re.M)
 body = re.sub(r"^\*\*(Table|Figure) \d.*$", "", body, flags=re.M)
 mw = len([w for w in re.split(r"\s+", re.sub(r"[*_#]", "", body)) if w.strip()])
 n += 1
-if mw > 3000:
-    fails.append(f"journal limit: main text {mw} words exceeds the 3000 word limit")
+if LIMITS["main_text_words"] and mw > LIMITS["main_text_words"]:
+    fails.append(f"journal limit: main text {mw} words exceeds the "
+                 f"{LIMITS['main_text_words']} word limit")
 aw = abstract_region
 for h in ("**Abstract**", "**Background.**", "**Methods.**", "**Results.**", "**Conclusions.**"):
     aw = aw.replace(h, "")
 aw = len([w for w in aw.split() if w.strip()])
 n += 1
-if aw > 250:
-    fails.append(f"journal limit: abstract {aw} words exceeds the 250 word limit")
+if LIMITS["abstract_words"] and aw > LIMITS["abstract_words"]:
+    fails.append(f"journal limit: abstract {aw} words exceeds the "
+                 f"{LIMITS['abstract_words']} word limit")
+n += 1
+title = text.splitlines()[0].strip().strip("*")
+if LIMITS["title_characters"] and len(title) > LIMITS["title_characters"]:
+    fails.append(f"journal limit: the title is {len(title)} characters, over the "
+                 f"{LIMITS['title_characters']} character limit")
 
 # -- submission gate: unresolved placeholders -------------------------------
 PLACEHOLDERS = re.findall(r"\[[A-Z][A-Z0-9_]{6,}\]", text)
@@ -538,7 +563,11 @@ if SUBMISSION:
         fails.append("submission gate: unresolved placeholders remain: "
                      + ", ".join(sorted(set(PLACEHOLDERS))))
 
-print(f"main text {mw} of 3000 words, abstract {aw} of 250 words.")
+print("main text %d words%s, abstract %d of %s words, title %d of %s characters."
+      % (mw,
+         "" if not LIMITS["main_text_words"] else " of %d" % LIMITS["main_text_words"],
+         aw, LIMITS["abstract_words"] or "no", len(title),
+         LIMITS["title_characters"] or "no"))
 if PLACEHOLDERS and not SUBMISSION:
     print("PENDING before submission: " + ", ".join(sorted(set(PLACEHOLDERS))))
 

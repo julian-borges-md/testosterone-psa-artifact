@@ -1,0 +1,11 @@
+# Limits published by the journal the manuscript is currently prepared for.
+# A blank value means the journal publishes no limit for that item and the
+# corresponding check does not run. Captured from the journal's own author
+# guidelines on the date in the venue record, never from memory.
+#
+# Current venue: the manuscript is prepared for a journal that publishes no
+# word, figure or table limit, caps the abstract at 250 words and caps the
+# title at 120 characters and spaces.
+main_text_words	
+abstract_words	250
+title_characters	120

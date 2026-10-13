@@ -1,6 +1,6 @@
 **Supplementary material**
 
-**Testosterone raises PSA, and much of its apparent prostate cancer risk runs through that channel: a Mendelian randomization and Bayesian synthesis study**
+**Testosterone Raises PSA, and Much of Its Apparent Prostate Cancer Risk Runs Through That Channel**
 
 Julian Borges, MD, MS.
 

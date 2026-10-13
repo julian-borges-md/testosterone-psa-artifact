@@ -1,6 +1,6 @@
 # STROBE-MR reporting checklist
 
-**Title.** Testosterone raises PSA, and much of its apparent prostate cancer risk runs through that channel: a Mendelian randomization and Bayesian synthesis study
+**Title.** Testosterone Raises PSA, and Much of Its Apparent Prostate Cancer Risk Runs Through That Channel
 
 **Author.** Julian Borges, MD, MS
 

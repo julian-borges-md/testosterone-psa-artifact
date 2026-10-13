@@ -9,7 +9,9 @@ jyborges@bu.edu | ORCID 0009-0001-9929-3135
 
 Dear Editors,
 
-I am submitting "Testosterone raises PSA, and much of its apparent prostate cancer risk runs through that channel: a Mendelian randomization and Bayesian synthesis study" for consideration as an Original Article.
+I am submitting "Testosterone Raises PSA, and Much of Its Apparent Prostate Cancer Risk Runs Through That Channel" for consideration as a Research Article.
+
+The mechanism is the premise of the design rather than an inference from it. Prostate specific antigen is transcribed under direct androgen receptor control, which is what makes it an in vivo bioassay of prostatic androgen signalling rather than a correlate of one, and the completed STROBE-MR checklist accompanies the submission with every item addressed.
 
 For decades clinical practice has carried the belief that testosterone causes prostate cancer. The usual modern reconciliation of the conflicting evidence is the androgen saturation model, which holds that prostatic androgen receptors are saturated at low serum testosterone, so variation within the physiological range cannot affect the prostate. That model is widely cited in clinical guidance and it has never been tested causally in humans.
 
@@ -20,6 +22,8 @@ I want to be precise about what that does and does not establish, because an ear
 The second finding is the one in the title. The prostate keeps responding to testosterone; what that response produces is PSA, and a raised PSA brings forward the biopsy that finds a tumour already present. Between a third and a half of the genetic association with diagnosed prostate cancer is carried by the PSA channel, and conditioning on PSA reduces the direct effect to an odds ratio of 1.04 with an interval from 0.83 to 1.30. Randomized trials show the same channel directly: therapy more than doubled prostate biopsies without increasing cancer. Reverse causation and confounding by BMI, IGF-1 and fasting insulin were excluded.
 
 Combining both bodies of evidence in a Bayesian synthesis, remaining 95 percent convinced that testosterone therapy causes prostate cancer requires beginning from a belief that risk is at least doubled, held as firmly as the randomized evidence itself. With the PSA channel removed the posterior odds ratio is 0.99.
+
+The readership this most concerns is the one that prescribes testosterone and then reads a PSA on therapy. A modest rise is expected pharmacodynamics on this evidence rather than a signal of tumour biology, and it should be interpreted against a treatment specific baseline. That is a statement about how to read a biomarker, not a safety clearance, and the manuscript is careful to keep the two apart.
 
 Three features may interest your reviewers.
 

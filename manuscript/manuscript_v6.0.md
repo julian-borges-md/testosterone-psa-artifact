@@ -1,4 +1,4 @@
-**Testosterone raises PSA, and much of its apparent prostate cancer risk runs through that channel: a Mendelian randomization and Bayesian synthesis study**
+**Testosterone Raises PSA, and Much of Its Apparent Prostate Cancer Risk Runs Through That Channel**
 
 **Julian Borges, MD, MS**
 
@@ -16,13 +16,7 @@ Correspondence: jyborges@bu.edu | ORCID 0009-0001-9929-3135
 
 **Conclusions.** Testosterone raises PSA, and much of its apparent prostate cancer risk runs through that channel rather than tumour biology. The evidence does not establish absence of effect.
 
-**Keywords:** testosterone; prostate cancer; prostate specific antigen; Mendelian randomization; androgen saturation model; detection bias; Bayesian synthesis.
-
-**Key Messages**
-
-- Genetically higher bioavailable testosterone raises prostate specific antigen across the sampled physiological range, which is to our knowledge the first causal test of the androgen saturation model in humans, although a linear instrumental variable average can bound but not locate the threshold the model posits.
-- Between a third and a half of the genetic association between testosterone and diagnosed prostate cancer is carried by the PSA channel, so part of that association reflects when tumours are found rather than whether they arise.
-- The residual direct effect is not distinguishable from the null but is not shown to be zero, and an absence claim would require an equivalence test that no available data set can support.
+**Keywords:** testosterone; prostate cancer; prostate specific antigen; Mendelian randomization; androgen saturation model; detection bias
 
 **Introduction**
 
@@ -34,7 +28,7 @@ It makes a directional prediction open to genetic test. PSA is transcribed from 
 
 We tested the saturation prediction, determined whether the prostate responds to bioavailable or to total testosterone, excluded reverse causation and metabolic confounding, and quantified how much prior conviction the belief that therapy causes prostate cancer requires in order to survive the randomized evidence.
 
-**Methods**
+**Materials and Methods**
 
 Full methods, including instrument construction, all estimator definitions, the threshold conversion and its constants, the power calculation and the protocol deviations, are in Supplementary Methods.
 
@@ -47,6 +41,8 @@ Full methods, including instrument construction, all estimator definitions, the 
 **Decomposition.** Multivariable MR regressed variant outcome effects jointly on bioavailable testosterone and PSA effects; the coefficient on testosterone is its direct effect holding PSA fixed, and instrument strength used the Sanderson conditional F statistic [28]. The PSA channel was estimated by the product of coefficients. The difference method is reported alongside it, but the two are not equal here and neither identifies a mediated proportion without an additivity assumption on the log odds scale, which the additivity gap shows to be violated at a case fraction of 0.564. The multivariable direct effect, which does not require that assumption, is therefore the primary quantity. Both decompositions are given in Supplementary Table S7.
 
 **Synthesis.** Counts from the 10 trials reporting prostate cancer events (8,631 participants, 50 events) were analysed with an exact conditional noncentral hypergeometric likelihood. The genetic estimate entered as an informative prior, prespecified as the fixed effect meta-analysis of the PRACTICAL and FinnGen estimates. A reverse Bayes analysis [29] then asked how firm a prior belief must be for the claim that therapy increases cancer to remain at least 95% probable after the trials (Supplementary Tables S1 and S2).
+
+**Ethical approval.** This study used fully deidentified, publicly available summary statistics from completed genetic association studies and published trial reports. It did not involve human subjects, identifiable private information, or any intervention. The author's institution has been asked to confirm the applicable determination; pending that confirmation the study is described as not constituting human subjects research rather than as carrying an institutional exemption determination.
 
 **Reproducibility.** Analysis code, committed result tables, the harmonised variant level inputs for all eight exposure to outcome pairs and the verification modules are openly released under an MIT licence at github.com/julian-borges-md/testosterone-psa-artifact, at tag v6.2, archived at https://doi.org/10.5281/zenodo.23326289. Three assertion modules run in continuous integration on every push without network access: 166 matrix assertions, 141 of them recomputed from the committed variant level data, 32 study level values, and a concordance module asserting that every printed, abstract and plotted value, and every supplementary cross reference, matches the committed matrix. The cross validation runs as a scheduled job. Reporting follows STROBE-MR [30].
 
@@ -90,55 +86,51 @@ What we cannot say is that testosterone is inert for the prostate. The organ res
 
 Testosterone raises PSA, and much of its apparent cancer risk runs through that channel. For the question clinicians face, whether raising testosterone in men without prostate cancer causes clinically meaningful disease, this study does not establish an answer of no. What it establishes is that a substantial part of the genetic signal runs through PSA, that the residual direct effect is not distinguishable from the null, and that randomized trials over about two years show no excess cancer while doubling biopsies. An absence claim would require an equivalence test that available data cannot support. Prostate safety arguments should rest on randomized outcomes and on tissue sensitivity rather than on receptor saturation, within the population the trials enrolled. The open question is lethal disease, and it remains the priority for future work.
 
-**Declarations**
+**Acknowledgments**
 
-**Ethical approval.** This study used fully deidentified, publicly available summary statistics from completed genetic association studies and published trial reports. It did not involve human subjects, identifiable private information, or any intervention. The author's institution has been asked to confirm the applicable determination; pending that confirmation the study is described as not constituting human subjects research rather than as carrying an institutional exemption determination.
+The author thanks the participants and the investigators of the contributing studies, whose summary data made this analysis possible: UK Biobank, the Million Veteran Program, the PRACTICAL consortium, FinnGen, the GIANT consortium and MAGIC. No person other than the author contributed to the design, the analysis or the writing.
 
 **Author contributions.** Julian Yin Vieira Borges (Conceptualization, Methodology, Software, Formal analysis, Data curation, Visualization, Writing original draft, Writing review and editing).
 
-**Supplementary data.** Supplementary material, comprising eight Methods sections and Tables S1 to S10, is available at the journal's website.
+**Data Availability**
 
-**Conflict of interest.** None declared.
-
-**Funding.** No specific grant from any funding agency in the public, commercial, or not-for-profit sectors.
-
-**Data availability.** All data analysed were obtained from publicly accessible repositories: the GWAS Catalog (GCST90012103, GCST90012109, GCST90012113, GCST90461907, GCST006085, GCST002783, GCST90019511, GCST90002238), FinnGen release 12, and the MRC IEU 1000 Genomes European reference panel. Randomized trial counts were taken from published articles and their open supplementary materials. Code, committed result tables, harmonised variant level inputs and figure data are at github.com/julian-borges-md/testosterone-psa-artifact under an MIT licence, at tag v6.2, with that tag archived at https://doi.org/10.5281/zenodo.23326289. No controlled access or patient identifiable data were used or redistributed.
+All data analysed were obtained from publicly accessible repositories: the GWAS Catalog (GCST90012103, GCST90012109, GCST90012113, GCST90461907, GCST006085, GCST002783, GCST90019511, GCST90002238), FinnGen release 12, and the MRC IEU 1000 Genomes European reference panel. Randomized trial counts were taken from published articles and their open supplementary materials. Code, committed result tables, harmonised variant level inputs and figure data are at github.com/julian-borges-md/testosterone-psa-artifact under an MIT licence, at tag v6.2, with that tag archived at https://doi.org/10.5281/zenodo.23326289. No controlled access or patient identifiable data were used or redistributed. Supplementary material, comprising eight Methods sections and Tables S1 to S10, is available at the journal's website.
 
 **References**
 
-1. Huggins C, Stevens RE Jr, Hodges CV. Studies on prostatic cancer: II. The effects of castration on advanced carcinoma of the prostate gland. Arch Surg 1941;43:209-23.
-2. Morgentaler A. Testosterone and prostate cancer: an historical perspective on a modern myth. Eur Urol 2006;50:935-9.
-3. Endogenous Hormones and Prostate Cancer Collaborative Group. Endogenous sex hormones and prostate cancer: a collaborative analysis of 18 prospective studies. J Natl Cancer Inst 2008;100:170-83.
-4. Watts EL, Appleby PN, Perez-Cornago A, et al. Low free testosterone and prostate cancer risk: a collaborative analysis of 20 prospective studies. Eur Urol 2018;74:585-94.
-5. Bhasin S, Travison TG, Pencina KM, et al. Prostate safety events during testosterone replacement therapy in men with hypogonadism: a randomized clinical trial. JAMA Netw Open 2023;6:e2348692.
-6. Lincoff AM, Bhasin S, Flevaris P, et al. Cardiovascular safety of testosterone-replacement therapy. N Engl J Med 2023;389:107-17.
-7. Rhomberg-Kauert AM, Tulstrup M, Badsted C, Horwitz H, Heerfordt IM. Mendelian randomization studies of testosterone exposure: a systematic review. Steroids 2025;218:109615.
-8. Morgentaler A, Traish AM. Shifting the paradigm of testosterone and prostate cancer: the saturation model and the limits of androgen-dependent growth. Eur Urol 2009;55:310-20.
-9. Bañez LL, Hamilton RJ, Partin AW, et al. Obesity-related plasma hemodilution and PSA concentration among men with prostate cancer. JAMA 2007;298:2275-80.
-10. Ruth KS, Day FR, Tyrrell J, et al. Using human genetics to understand the disease impacts of testosterone in men and women. Nat Med 2020;26:252-8.
-11. Hoffmann TJ, Graff RE, Madduri RK, et al. Genome-wide association study of prostate-specific antigen levels in 392,522 men identifies new loci and improves prediction across ancestry groups. Nat Genet 2025;57:334-44.
-12. Schumacher FR, Al Olama AA, Berndt SI, et al. Association analyses of more than 140,000 men identify 63 new prostate cancer susceptibility loci. Nat Genet 2018;50:928-36.
-13. Kurki MI, Karjalainen J, Palta P, et al. FinnGen provides genetic insights from a well-phenotyped isolated population. Nature 2023;613:508-18.
-14. Locke AE, Kahali B, Berndt SI, et al. Genetic studies of body mass index yield new insights for obesity biology. Nature 2015;518:197-206.
-15. Sinnott-Armstrong N, Tanigawa Y, Amar D, et al. Genetics of 35 blood and urine biomarkers in the UK Biobank. Nat Genet 2021;53:185-94.
-16. Chen J, Spracklen CN, Marenne G, et al. The trans-ancestral genomic architecture of glycemic traits. Nat Genet 2021;53:840-60.
-17. García-Becerra CA, Arias-Gallardo MI, Juárez-García JE, et al. Cardiovascular and prostate cancer risk associated to testosterone replacement therapy: a systematic review and meta-analysis of 41 randomized controlled trials. Int J Impot Res 2026.
-18. Sharifan A. Comment on: cardiovascular and prostate cancer risk associated to testosterone replacement therapy. Int J Impot Res 2026.
-19. Zeng B, Qiu S, Xiong X, et al. The effect of different administrations of testosterone therapy on adverse prostate events: a Bayesian network meta-analysis. Front Endocrinol 2022;13:1009900.
-20. Burgess S, Butterworth A, Thompson SG. Mendelian randomization analysis with multiple genetic variants using summarized data. Genet Epidemiol 2013;37:658-65.
-21. Bowden J, Davey Smith G, Burgess S. Mendelian randomization with invalid instruments: effect estimation and bias detection through Egger regression. Int J Epidemiol 2015;44:512-25.
-22. Bowden J, Davey Smith G, Haycock PC, Burgess S. Consistent estimation in Mendelian randomization with some invalid instruments using a weighted median estimator. Genet Epidemiol 2016;40:304-14.
-23. Hartwig FP, Davey Smith G, Bowden J. Robust inference in summary data Mendelian randomization via the zero modal pleiotropy assumption. Int J Epidemiol 2017;46:1985-98.
-24. Xue H, Shen X, Pan W. Constrained maximum likelihood-based Mendelian randomization robust to both correlated and uncorrelated pleiotropic effects. Am J Hum Genet 2021;108:1251-69.
-25. Zhao Q, Wang J, Hemani G, Bowden J, Small DS. Statistical inference in two-sample summary-data Mendelian randomization using robust adjusted profile score. Ann Stat 2020;48:1742-69.
-26. Morrison J, Knoblauch N, Marcus JH, Stephens M, He X. Mendelian randomization accounting for correlated and uncorrelated pleiotropic effects using genome-wide summary statistics. Nat Genet 2020;52:740-7.
-27. Hemani G, Tilling K, Davey Smith G. Orienting the causal relationship between imprecisely measured traits using GWAS summary data. PLoS Genet 2017;13:e1007081.
-28. Sanderson E, Spiller W, Bowden J. Testing and correcting for weak and pleiotropic instruments in two-sample multivariable Mendelian randomization. Stat Med 2021;40:5434-52.
-29. Matthews RAJ. Beyond significance: principles and practice of the Analysis of Credibility. R Soc Open Sci 2018;5:171047.
-30. Skrivankova VW, Richmond RC, Woolf BAR, et al. Strengthening the Reporting of Observational Studies in Epidemiology Using Mendelian Randomization: the STROBE-MR Statement. JAMA 2021;326:1614-21.
-31. Hynes MC, Watling CZ, Dunneram Y, Key TJ, Perez-Cornago A. Associations of body composition measures with circulating insulin-like growth factor-I, testosterone, and sex hormone-binding globulin concentrations in 16,000 men. Int J Obes 2024;48:1809-17.
-32. Vermeulen A, Verdonck L, Kaufman JM. A critical evaluation of simple methods for the estimation of free testosterone in serum. J Clin Endocrinol Metab 1999;84:3666-72.
-33. Cheung-Flynn J, Prapapanich V, Cox MB, Riggs DL, Suarez-Quian C, Smith DF. Physiological role for the cochaperone FKBP52 in androgen receptor signaling. Mol Endocrinol 2005;19:1654-66.
+1. Huggins C, Stevens RE Jr, Hodges CV. Studies on prostatic cancer: II. The effects of castration on advanced carcinoma of the prostate gland. Arch Surg. 1941;43:209-223.
+2. Morgentaler A. Testosterone and prostate cancer: an historical perspective on a modern myth. Eur Urol. 2006;50:935-939.
+3. Endogenous Hormones and Prostate Cancer Collaborative Group. Endogenous sex hormones and prostate cancer: a collaborative analysis of 18 prospective studies. J Natl Cancer Inst. 2008;100:170-183.
+4. Watts EL, Appleby PN, Perez-Cornago A, et al. Low free testosterone and prostate cancer risk: a collaborative analysis of 20 prospective studies. Eur Urol. 2018;74:585-594.
+5. Bhasin S, Travison TG, Pencina KM, et al. Prostate safety events during testosterone replacement therapy in men with hypogonadism: a randomized clinical trial. JAMA Netw Open. 2023;6:e2348692.
+6. Lincoff AM, Bhasin S, Flevaris P, et al. Cardiovascular safety of testosterone-replacement therapy. N Engl J Med. 2023;389:107-117.
+7. Rhomberg-Kauert AM, Tulstrup M, Badsted C, Horwitz H, Heerfordt IM. Mendelian randomization studies of testosterone exposure: a systematic review. Steroids. 2025;218:109615.
+8. Morgentaler A, Traish AM. Shifting the paradigm of testosterone and prostate cancer: the saturation model and the limits of androgen-dependent growth. Eur Urol. 2009;55:310-320.
+9. Bañez LL, Hamilton RJ, Partin AW, et al. Obesity-related plasma hemodilution and PSA concentration among men with prostate cancer. JAMA. 2007;298:2275-2280.
+10. Ruth KS, Day FR, Tyrrell J, et al. Using human genetics to understand the disease impacts of testosterone in men and women. Nat Med. 2020;26:252-258.
+11. Hoffmann TJ, Graff RE, Madduri RK, et al. Genome-wide association study of prostate-specific antigen levels in 392,522 men identifies new loci and improves prediction across ancestry groups. Nat Genet. 2025;57:334-344.
+12. Schumacher FR, Al Olama AA, Berndt SI, et al. Association analyses of more than 140,000 men identify 63 new prostate cancer susceptibility loci. Nat Genet. 2018;50:928-936.
+13. Kurki MI, Karjalainen J, Palta P, et al. FinnGen provides genetic insights from a well-phenotyped isolated population. Nature. 2023;613:508-518.
+14. Locke AE, Kahali B, Berndt SI, et al. Genetic studies of body mass index yield new insights for obesity biology. Nature. 2015;518:197-206.
+15. Sinnott-Armstrong N, Tanigawa Y, Amar D, et al. Genetics of 35 blood and urine biomarkers in the UK Biobank. Nat Genet. 2021;53:185-194.
+16. Chen J, Spracklen CN, Marenne G, et al. The trans-ancestral genomic architecture of glycemic traits. Nat Genet. 2021;53:840-860.
+17. García-Becerra CA, Arias-Gallardo MI, Juárez-García JE, et al. Cardiovascular and prostate cancer risk associated to testosterone replacement therapy: a systematic review and meta-analysis of 41 randomized controlled trials. Int J Impot Res. 2026.
+18. Sharifan A. Comment on: cardiovascular and prostate cancer risk associated to testosterone replacement therapy. Int J Impot Res. 2026.
+19. Zeng B, Qiu S, Xiong X, et al. The effect of different administrations of testosterone therapy on adverse prostate events: a Bayesian network meta-analysis. Front Endocrinol. 2022;13:1009900.
+20. Burgess S, Butterworth A, Thompson SG. Mendelian randomization analysis with multiple genetic variants using summarized data. Genet Epidemiol. 2013;37:658-665.
+21. Bowden J, Davey Smith G, Burgess S. Mendelian randomization with invalid instruments: effect estimation and bias detection through Egger regression. Int J Epidemiol. 2015;44:512-525.
+22. Bowden J, Davey Smith G, Haycock PC, Burgess S. Consistent estimation in Mendelian randomization with some invalid instruments using a weighted median estimator. Genet Epidemiol. 2016;40:304-314.
+23. Hartwig FP, Davey Smith G, Bowden J. Robust inference in summary data Mendelian randomization via the zero modal pleiotropy assumption. Int J Epidemiol. 2017;46:1985-1998.
+24. Xue H, Shen X, Pan W. Constrained maximum likelihood-based Mendelian randomization robust to both correlated and uncorrelated pleiotropic effects. Am J Hum Genet. 2021;108:1251-1269.
+25. Zhao Q, Wang J, Hemani G, Bowden J, Small DS. Statistical inference in two-sample summary-data Mendelian randomization using robust adjusted profile score. Ann Stat. 2020;48:1742-1769.
+26. Morrison J, Knoblauch N, Marcus JH, Stephens M, He X. Mendelian randomization accounting for correlated and uncorrelated pleiotropic effects using genome-wide summary statistics. Nat Genet. 2020;52:740-747.
+27. Hemani G, Tilling K, Davey Smith G. Orienting the causal relationship between imprecisely measured traits using GWAS summary data. PLoS Genet. 2017;13:e1007081.
+28. Sanderson E, Spiller W, Bowden J. Testing and correcting for weak and pleiotropic instruments in two-sample multivariable Mendelian randomization. Stat Med. 2021;40:5434-5452.
+29. Matthews RAJ. Beyond significance: principles and practice of the Analysis of Credibility. R Soc Open Sci. 2018;5:171047.
+30. Skrivankova VW, Richmond RC, Woolf BAR, et al. Strengthening the Reporting of Observational Studies in Epidemiology Using Mendelian Randomization: the STROBE-MR Statement. JAMA. 2021;326:1614-1621.
+31. Hynes MC, Watling CZ, Dunneram Y, Key TJ, Perez-Cornago A. Associations of body composition measures with circulating insulin-like growth factor-I, testosterone, and sex hormone-binding globulin concentrations in 16,000 men. Int J Obes. 2024;48:1809-1817.
+32. Vermeulen A, Verdonck L, Kaufman JM. A critical evaluation of simple methods for the estimation of free testosterone in serum. J Clin Endocrinol Metab. 1999;84:3666-3672.
+33. Cheung-Flynn J, Prapapanich V, Cox MB, Riggs DL, Suarez-Quian C, Smith DF. Physiological role for the cochaperone FKBP52 in androgen receptor signaling. Mol Endocrinol. 2005;19:1654-1666.
 
 
 **Tables**

@@ -1,6 +1,6 @@
 # Title page
 
-**Title.** Testosterone raises PSA, and much of its apparent prostate cancer risk runs through that channel: a Mendelian randomization and Bayesian synthesis study
+**Title.** Testosterone Raises PSA, and Much of Its Apparent Prostate Cancer Risk Runs Through That Channel
 
 **Running head.** Testosterone, PSA and prostate cancer detection
 
@@ -17,19 +17,19 @@ United States
 Email: jyborges@bu.edu
 ORCID: 0009-0001-9929-3135
 
-**Word counts.** Main text 2,979 words, against an Original Article limit of 3,000. Abstract 249 words excluding the four structured headings, against a limit of 250.
+**Funding.** No specific grant was received from any funding agency in the public, commercial, or not-for-profit sectors.
 
-**Display items.** 6 tables and 2 figures, against a limit of 8 in total.
+**Disclosure summary.** The author has nothing to disclose. There are no competing financial or non financial interests bearing on the work reported or on the conclusions, implications or opinions stated.
 
-**References.** 33, against a limit of 50.
+**Article type.** Research Article
 
-**Key Messages.** 3 single sentence bullet points, as required.
+**Counts.** Title 96 characters. Main text 3,045 words. Abstract 249 words excluding the four headings. 6 tables, 2 figures, 33 references.
 
-**Keywords.** testosterone; prostate cancer; prostate specific antigen; Mendelian randomization; androgen saturation model; detection bias; Bayesian synthesis
+**Keywords.** testosterone; prostate cancer; prostate specific antigen; Mendelian randomization; androgen saturation model; detection bias
 
-**Article type.** Original Article
+**Reporting guideline.** STROBE-MR. The completed checklist is supplied as a separate file, and every item is addressed.
 
-**Reporting guideline.** STROBE-MR. The completed checklist is supplied as a separate file.
+**Mechanistic basis.** Prostate specific antigen is transcribed under direct androgen receptor control, which is why it serves here as an in vivo bioassay of prostatic androgen signalling rather than as a correlate.
 
 **Data and code.** github.com/julian-borges-md/testosterone-psa-artifact at tag v6.2, under an MIT licence, archived at https://doi.org/10.5281/zenodo.23326289.
 
