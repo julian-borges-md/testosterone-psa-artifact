@@ -2,23 +2,27 @@ cff-version: 1.2.0
 message: "If you use this software or its results, please cite it as below."
 title: "Testosterone Raises PSA, and Much of Its Apparent Prostate Cancer Risk Runs Through That Channel"
 abstract: >-
-  A Mendelian randomization and Bayesian evidence synthesis study. Using PSA as
-  an in vivo bioassay of prostatic androgen receptor signaling, it falsifies the
-  androgen saturation model, excludes reverse causation and metabolic
-  confounding, identifies a PSA driven detection signature across exposures and
-  cohorts, and shows that randomized trials of testosterone therapy double
-  prostate biopsies without increasing prostate cancer.
+  A two sample Mendelian randomization and Bayesian evidence synthesis study.
+  Prostate specific antigen is transcribed under androgen receptor control and
+  is used here as an in vivo bioassay of prostatic androgen signalling:
+  genetically higher bioavailable testosterone raises PSA across the sampled
+  physiological range, which bounds the androgen saturation model rather than
+  refuting it. Between a third and a half of the genetic association with
+  diagnosed prostate cancer is carried by the PSA channel, the residual direct
+  effect is not distinguishable from the null, and in randomized trials
+  testosterone therapy doubled prostate biopsies without increasing prostate
+  cancer. The evidence does not establish absence of effect.
 type: software
 authors:
   - family-names: Borges
     given-names: Julian
     orcid: "https://orcid.org/0009-0001-9929-3135"
     email: jyborges@bu.edu
-    affiliation: "Department of Computer Science, Boston University"
+    affiliation: "Department of Computer Science, Boston University Metropolitan College"
 repository-code: "https://github.com/julian-borges-md/testosterone-psa-artifact"
 license: MIT
-version: 1.0.0
-date-released: "2026-10-11"
+version: 6.3
+date-released: "2026-10-13"
 keywords:
   - testosterone
   - prostate cancer
@@ -28,11 +32,11 @@ keywords:
   - detection bias
   - Bayesian synthesis
   - reproducibility
-doi: 10.5281/zenodo.23326289
+doi: 10.5281/zenodo.23324218
 identifiers:
-  - type: doi
-    value: 10.5281/zenodo.23326289
-    description: Archived snapshot of version v6.0
   - type: doi
     value: 10.5281/zenodo.23324218
     description: Concept DOI, always resolves to the latest version
+  - type: doi
+    value: 10.5281/zenodo.23326289
+    description: Archived snapshot of version v6.2

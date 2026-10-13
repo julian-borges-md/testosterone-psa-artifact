@@ -7,9 +7,9 @@
 
 ---
 
-# Testosterone Raises PSA, Not Prostate Cancer Risk
+# Testosterone Raises PSA, and Much of Its Apparent Prostate Cancer Risk Runs Through That Channel
 
-### Evidence from Mendelian randomization and randomized trials
+### Evidence from Mendelian randomization, Bayesian synthesis and randomized trials
 
 **Author:** Julian Borges, MD, MS
 
@@ -21,7 +21,7 @@ For 85 years, clinical practice has carried the belief that testosterone causes 
 
 This project tests that reconciliation instead of assuming it. Prostate specific antigen (PSA) is transcribed under direct androgen receptor control, so it serves as an in vivo bioassay of prostatic androgen signaling. If the receptor is saturated, genetically higher testosterone should not move PSA.
 
-**It does.** The prostate keeps responding across the physiological range. That response raises PSA, a raised PSA triggers biopsy, and biopsy finds tumours that were already present. Across exposures, cohorts and trials, the cancer signal follows the PSA signal. Once the PSA channel is removed, genetic and randomized evidence converge on no meaningful effect of testosterone on prostate cancer risk: the diagnosis arrives earlier without the disease being more common.
+**It does.** The prostate keeps responding across the physiological range. That response raises PSA, a raised PSA triggers biopsy, and biopsy finds tumours that were already present. Across exposures, cohorts and trials, the cancer signal follows the PSA signal. Once the PSA channel is removed, the genetic and randomized evidence converge on a posterior centred near the null: the diagnosis arrives earlier rather than the disease being more common. The evidence does not establish absence of effect, and this project does not claim it.
 
 ---
 
@@ -29,7 +29,7 @@ This project tests that reconciliation instead of assuming it. Prostate specific
 
 | # | Finding | Value |
 |---|---|---|
-| F1 | Saturation model falsified: bioavailable testosterone raises PSA | **0.085** natural log units per SD (IVW; 95% CI 0.042 to 0.127). Weighted median 0.130, weighted mode 0.149, MR cML 0.178. Prespecified falsification rule met |
+| F1 | Bioavailable testosterone raises PSA across the sampled range | **0.085** natural log units per SD (IVW; 95% CI 0.042 to 0.127). Weighted median 0.130, weighted mode 0.149, MR cML 0.178. The prespecified directional criterion is met, and because a linear instrumental variable average over a population in which some men lie below a threshold is compatible with strict saturation, this bounds the saturation model rather than refuting it (see L15) |
 | F2 | The prostate reads bioavailable, not total, testosterone | Total testosterone **0.010** (null); SHBG **minus 0.076** |
 | F3 | Cancer association present in a screened consortium, not in a registry cohort | PRACTICAL OR **1.19** (1.08 to 1.32); FinnGen OR **1.05** (0.91 to 1.23) |
 | F4 | About half of the genetic cancer association runs through PSA | Direct effect conditional on PSA OR **1.04** (0.83 to 1.30); PSA channel share **50%**, to be read as an upper bound (see L12) |
@@ -189,8 +189,9 @@ This repository documents its own defects rather than omitting them.
 | L10 | Winner's curse: instruments were selected and estimated in the same UK Biobank GWAS, inflating apparent instrument strength; small at mean F above 80 |
 | L11 | The detection signature is descriptive: with three exposures the sign concordance test cannot reach significance (minimum attainable one-sided p = 0.125) |
 | L12 | Conditioning on PSA may induce collider bias, since PSA lies downstream of undiagnosed tumour. A negative control (results/stage5) favours mediation but does not exclude a collider component, so the PSA channel share is an upper bound |
-| L13 | The synthesis is conditional on the mediation estimate: rejecting it returns a posterior OR of 1.14 and a 12% probability of meaningful harm. The saturation falsification and the trial biopsy finding do not depend on it |
+| L13 | The synthesis is conditional on the mediation estimate: rejecting it returns a posterior OR of 1.14 and a 12% probability of meaningful harm. The PSA response to testosterone and the trial biopsy finding do not depend on it |
 | L14 | The exposure is lifelong endogenous testosterone, not administered therapy; claims about therapy rest on cited randomized evidence |
+| L15 | A linear instrumental variable average cannot refute a threshold model. A positive average is compatible with saturation if enough men lie below the threshold; that possibility is bounded here, requiring the below threshold stratum to carry a slope about 11.5 times the observed average at 8 nmol/L and about 15,000 times at 4 nmol/L, and a bound is not a rejection. Threshold location is not tested; non linear MR on individual level data is the decisive test |
 
 **Corrections are on record.** An apparent conflict between genetic and trial evidence was driven by a pooled estimate that included a registry cohort, and was withdrawn. The genetic prior was later changed from PRACTICAL only to a meta-analysis of both cohorts, which was the more conservative choice against our own hypothesis.
 

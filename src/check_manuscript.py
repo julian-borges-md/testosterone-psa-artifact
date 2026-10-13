@@ -37,6 +37,20 @@ agrees with the computation and with itself.
 7. Venue neutrality. The tracked tree names no submission target. Tokens are in
    docs/venue_denylist.txt rather than here, so that this module is scanned too.
 
+8. Archive citation. The tag the deposit corresponds to is cited and has the
+   shape of a version tag, so a prose edit cannot leave the citation
+   grammatical and pointing at nothing.
+
+9. Falsification polarity. In the manuscript and in every document that travels
+   with it, a falsification token near the saturation subject carries a negation
+   before it. Gate 6 lists retracted phrases and is defeated by paraphrase; this
+   states the property, which is what the limitations table actually asserts.
+
+10. Absence limit. Every document that summarises the study carries the sentence
+   that the evidence does not establish absence of effect. A summary that keeps
+   the detection half of the conclusion and drops the limit is a stronger paper
+   than the one submitted.
+
 Journal limits are asserted on a documented basis. With --submission, the module
 additionally asserts that no unresolved placeholder remains; that gate is a
 submission precondition and deliberately does not run on every push, so that a
@@ -458,6 +472,97 @@ for rel in COMPANIONS:
         if phrase in comp.lower() if phrase.islower() else phrase in comp:
             fails.append(f"companion documents: {rel} asserts {phrase!r}, which the "
                          f"manuscript has retracted")
+
+# -- gate 9: falsification polarity -----------------------------------------
+# Gate 6 holds a list of retracted phrases, which is an enumeration and is
+# therefore defeated by paraphrase. It carried "prespecified falsification
+# criterion" while the README said "Prespecified falsification rule met" and
+# CITATION.cff said "falsifies the androgen saturation model", so an assertion
+# the manuscript disclaims travelled in the public record and in the archival
+# metadata. This gate states the property instead of listing its instances.
+#
+# A falsification token near the saturation subject is an assertion unless it
+# is negated, and in every correct usage the negation PRECEDES the token: "does
+# not claim to falsify", "cannot falsify". Only the preceding text is searched,
+# so a trailing clause that happens to contain a negative word cannot excuse an
+# affirmative one, which is how "The saturation falsification ... do not depend
+# on it" would otherwise pass. Tokens with no saturation subject nearby are not
+# this gate's business: the falsifiability of the verification harness is a
+# different and correct use of the word.
+#
+# The search runs to the start of the sentence or table cell holding the token
+# and no further. A fixed character window was tried first and leaked at once:
+# the paragraph above the findings table ends "does not claim it", so every
+# claim in the first row of that table inherited a negation from a different
+# sentence. A negation only qualifies the clause it is in.
+POLARITY = ["manuscript/manuscript_v6.0.md", "manuscript/supplementary_v6.0.md",
+            "manuscript/STROBE-MR_checklist.md", "manuscript/cover_letter.md",
+            "CITATION.cff", "README.md"]
+TOKEN = re.compile(r"falsif\w*", re.I)
+SUBJECT = re.compile(r"saturation|saturated|threshold model|central prediction", re.I)
+NEGATOR = re.compile(r"\bnot\b|\bno\b|\bcannot\b|\bnever\b|\bdenies\b|\bdenied\b|"
+                     r"\brather than\b", re.I)
+SUBJ, UNIT_MAX = 200, 300
+BOUNDARY = re.compile(r"[|\n]|\. |: |; ")
+
+
+def clause_before(doc, i):
+    """The text from the start of the sentence or table cell up to i."""
+    seg = doc[max(0, i - UNIT_MAX):i]
+    last = 0
+    for b in BOUNDARY.finditer(seg):
+        last = b.end()
+    return seg[last:]
+
+
+for rel in POLARITY:
+    path = os.path.join(ROOT, rel)
+    if not os.path.exists(path):
+        continue
+    doc = open(path, encoding="utf-8", errors="ignore").read()
+    for mt in TOKEN.finditer(doc):
+        near = doc[max(0, mt.start() - SUBJ):mt.end() + SUBJ]
+        if not SUBJECT.search(near):
+            continue
+        n += 1
+        if not NEGATOR.search(clause_before(doc, mt.start())):
+            fails.append(f"falsification polarity: {rel} asserts "
+                         f"{doc[max(0, mt.start() - 60):mt.end() + 40].strip()!r} "
+                         f"with no negation before the claim, and the manuscript "
+                         f"holds that a linear IV average cannot refute a "
+                         f"threshold model")
+
+# -- gate 10: the absence limit travels with every summary ------------------
+# The manuscript's conclusion is bounded on both sides: much of the apparent
+# risk runs through detection, AND the evidence does not establish absence of
+# effect. A summary that keeps the first half and drops the second is a
+# stronger paper than the one submitted, and the data availability statement
+# sends readers to these documents. The positive requirement is the property
+# doing the work here; the two denied strings are the historical forms this
+# repository actually carried, kept because an exact form costs nothing to
+# check once it is known.
+LIMIT = "does not establish absence of effect"
+CARRIES_LIMIT = ["manuscript/manuscript_v6.0.md", "CITATION.cff", "README.md"]
+ABSENCE_FORMS = ["raises psa, not prostate cancer risk",
+                 "no meaningful effect of testosterone on prostate cancer"]
+
+for rel in CARRIES_LIMIT:
+    path = os.path.join(ROOT, rel)
+    n += 1
+    if not os.path.exists(path):
+        fails.append(f"absence limit: {rel} is missing")
+        continue
+    doc = open(path, encoding="utf-8", errors="ignore").read()
+    if LIMIT not in doc:
+        fails.append(f"absence limit: {rel} summarises the study without the "
+                     f"sentence that the evidence {LIMIT!r}, which the abstract "
+                     f"carries and which bounds the conclusion")
+    for form in ABSENCE_FORMS:
+        n += 1
+        if form in doc.lower():
+            fails.append(f"absence limit: {rel} asserts {form!r}, which states "
+                         f"an absence of effect that the manuscript declines to "
+                         f"claim")
 
 # -- gate 7: the repository names no submission target ----------------------
 # This repository holds the analysis and the manuscript and is venue neutral;

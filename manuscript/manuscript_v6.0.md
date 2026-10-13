@@ -94,7 +94,7 @@ The author thanks the participants and the investigators of the contributing stu
 
 **Data Availability**
 
-All data analysed were obtained from publicly accessible repositories: the GWAS Catalog (GCST90012103, GCST90012109, GCST90012113, GCST90461907, GCST006085, GCST002783, GCST90019511, GCST90002238), FinnGen release 12, and the MRC IEU 1000 Genomes European reference panel. Randomized trial counts were taken from published articles and their open supplementary materials. Code, committed result tables, harmonised variant level inputs and figure data are at github.com/julian-borges-md/testosterone-psa-artifact under an MIT licence, at tag v6.2, with that tag archived at https://doi.org/10.5281/zenodo.23326289. No controlled access or patient identifiable data were used or redistributed. Supplementary material, comprising eight Methods sections and Tables S1 to S10, is available at the journal's website.
+Original data generated and analyzed during this study are included in this published article or in the data repositories listed in References. All data analysed were obtained from publicly accessible repositories: the GWAS Catalog (GCST90012103, GCST90012109, GCST90012113, GCST90461907, GCST006085, GCST002783, GCST90019511, GCST90002238), FinnGen release 12, and the MRC IEU 1000 Genomes European reference panel. Randomized trial counts were taken from published articles and their open supplementary materials. Code, committed result tables, harmonised variant level inputs and figure data are at github.com/julian-borges-md/testosterone-psa-artifact under an MIT licence, at tag v6.2, with that tag archived at https://doi.org/10.5281/zenodo.23326289. No controlled access or patient identifiable data were used or redistributed. Supplementary material, comprising eight Methods sections and Tables S1 to S10, is available at the journal's website.
 
 **References**
 
@@ -131,6 +131,17 @@ All data analysed were obtained from publicly accessible repositories: the GWAS 
 31. Hynes MC, Watling CZ, Dunneram Y, Key TJ, Perez-Cornago A. Associations of body composition measures with circulating insulin-like growth factor-I, testosterone, and sex hormone-binding globulin concentrations in 16,000 men. Int J Obes. 2024;48:1809-1817.
 32. Vermeulen A, Verdonck L, Kaufman JM. A critical evaluation of simple methods for the estimation of free testosterone in serum. J Clin Endocrinol Metab. 1999;84:3666-3672.
 33. Cheung-Flynn J, Prapapanich V, Cox MB, Riggs DL, Suarez-Quian C, Smith DF. Physiological role for the cochaperone FKBP52 in androgen receptor signaling. Mol Endocrinol. 2005;19:1654-1666.
+
+
+**Figure legends**
+
+**Figure 1. The complete estimator matrix for PSA.** Effect of each exposure on PSA in natural log units per standard deviation, for all seven estimators and all three exposures. Filled markers indicate a 95 percent interval excluding the null and open markers an interval containing it; bars are 95 percent confidence intervals. Values are taken from the same committed matrix as Table 2.
+
+**Figure 2. Randomized trial evidence and the Bayesian synthesis.** A, testosterone therapy in randomized trials: prostate biopsies and prostate cancer. B, posterior odds ratio for any prostate cancer by assumed therapeutic shift, with and without the PSA channel.
+
+![](Figure1_saturation_full_matrix.png)
+
+![](Figure4_trials_and_synthesis.png)
 
 
 **Tables**
@@ -217,13 +228,3 @@ All data analysed were obtained from publicly accessible repositories: the GWAS 
 | Directional pleiotropy and heterogeneity | Egger intercept p = 1.3e-4 and I squared 87.9 to 90.0 percent in the PSA analyses, traced in part to tissue sensitivity loci, biasing IVW toward the null |
 | Mixed ancestry across the analysis | European exposures against a multiancestry PSA outcome, a European cancer cohort and a Finnish one; no transportability claim is made to African ancestry men, who carry the highest disease burden |
 | Prespecification is internal | Time stamped in the committed analysis log, not registered with an external registry |
-
-**Figure legends**
-
-**Figure 1. The complete estimator matrix for PSA.** Effect of each exposure on PSA in natural log units per standard deviation, for all seven estimators and all three exposures. Filled markers indicate a 95 percent interval excluding the null and open markers an interval containing it; bars are 95 percent confidence intervals. Values are taken from the same committed matrix as Table 2.
-
-**Figure 2. Randomized trial evidence and the Bayesian synthesis.** A, testosterone therapy in randomized trials: prostate biopsies and prostate cancer. B, posterior odds ratio for any prostate cancer by assumed therapeutic shift, with and without the PSA channel.
-
-![](Figure1_saturation_full_matrix.png)
-
-![](Figure4_trials_and_synthesis.png)
