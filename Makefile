@@ -18,7 +18,7 @@
 
 PY := python3
 
-.PHONY: install verify matrix matrix-full manuscript submission crossvalidate selftest figures docx archive-snapshot clean
+.PHONY: install verify matrix matrix-full manuscript submission crossvalidate selftest figures docx archive-snapshot authorship hooks clean
 
 install:
 	$(PY) -m pip install -r requirements.txt
@@ -60,6 +60,12 @@ docx:
 
 archive-snapshot:
 	$(PY) src/write_archive_snapshot.py $(TAG) $(DOI)
+
+authorship:
+	$(PY) src/check_authorship.py
+
+hooks:
+	bash tools/install_hooks.sh
 
 clean:
 	find . -name __pycache__ -type d -exec rm -rf {} +

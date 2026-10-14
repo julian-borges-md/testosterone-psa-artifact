@@ -1,0 +1,5 @@
+# Accepted findings of src/check_authorship.py, keyed by commit sha or by
+# repository relative path. Every entry is printed on every run, so an
+# accepted deviation stays visible rather than passing silently. An entry is
+# added only on the author's decision, with the date of that decision.
+key	reason	decided_on

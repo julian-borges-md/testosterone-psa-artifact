@@ -29,6 +29,20 @@ jobs:
       - name: Prove the check can fail
         run: python src/selftest.py
 
+  authorship:
+    # Sole authorship and identifier hygiene across the whole history and every
+    # tracked document. Needs full depth: a shallow checkout sees one commit.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Gate authorship and identifiers
+        run: python src/check_authorship.py
+
   monte-carlo:
     # The bootstrap and data perturbation standard errors need several hundred
     # refits per cell, so they are checked on demand and weekly rather than on
