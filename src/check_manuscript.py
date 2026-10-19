@@ -746,6 +746,42 @@ if LIMITS["title_characters"] and len(title) > LIMITS["title_characters"]:
     fails.append(f"journal limit: the title is {len(title)} characters, over the "
                  f"{LIMITS['title_characters']} character limit")
 
+# -- title page concordance -------------------------------------------------
+# The title page states six counts and closes by claiming they are asserted
+# mechanically and cannot drift. Nothing read that page until this gate existed,
+# and three of the six had drifted: the title, the main text length and the
+# abstract length were those of a superseded draft. The counts are recomputed
+# here from the manuscript, so the claim the page makes about itself is the
+# claim this module enforces.
+TITLE_PAGE = os.path.join(ROOT, "manuscript", "title_page.md")
+if os.path.isfile(TITLE_PAGE):
+    tp = open(TITLE_PAGE, encoding="utf-8").read()
+    n += 1
+    _m = re.search(r"^\*\*Title\.\*\*\s*(.+?)\s*$", tp, re.M)
+    if not _m:
+        fails.append("title page: states no title")
+    elif _m.group(1) != title:
+        fails.append("title page: the stated title is not the manuscript title")
+    _tables = len(set(re.findall(r"\*\*Table (\d+)[.,]", text)))
+    _figures = len(set(re.findall(r"\*\*Figure (\d+)[.,]", text)))
+    _refblock = re.search(r"\*\*References\*\*(.*)$", text, re.S)
+    _refs = (len(re.findall(r"^\s*\d+\.\s", _refblock.group(1), re.M))
+             if _refblock else 0)
+    for _label, _pat, _computed in (
+            ("title characters", r"Title ([\d,]+) characters", len(title)),
+            ("main text words", r"Main text ([\d,]+) words", mw),
+            ("abstract words", r"Abstract ([\d,]+) words", aw),
+            ("tables", r"([\d,]+) tables", _tables),
+            ("figures", r"([\d,]+) figures", _figures),
+            ("references", r"([\d,]+) references", _refs)):
+        n += 1
+        _c = re.search(_pat, tp)
+        if not _c:
+            fails.append("title page: states no %s count" % _label)
+        elif int(_c.group(1).replace(",", "")) != _computed:
+            fails.append("title page: states %s for %s, the manuscript gives %d"
+                         % (_c.group(1), _label, _computed))
+
 # -- submission gate: unresolved placeholders -------------------------------
 PLACEHOLDERS = re.findall(r"\[[A-Z][A-Z0-9_]{6,}\]", text)
 if SUBMISSION:
