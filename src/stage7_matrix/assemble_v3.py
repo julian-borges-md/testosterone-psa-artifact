@@ -1,3 +1,6 @@
+import os as _os
+GW = _os.environ.get('GW_WORK', '/tmp/gw')
+TOOLS = _os.environ.get('GW_TOOLS', '/tmp/tools')
 """Assemble every number reported in the manuscript from the regenerated run, and compute
 the derived quantities the R2 review requires. Prints a single auditable block.
 """
@@ -11,7 +14,7 @@ import pandas as pd
 from scipy import stats
 from scipy.special import gammaln, logsumexp
 
-OUT = "/tmp/gw/out"
+OUT = f"{GW}/out"
 REPO = sys.argv[1]
 pd.set_option("display.width", 250)
 

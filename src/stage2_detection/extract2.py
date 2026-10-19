@@ -1,6 +1,9 @@
+import os as _os
+GW = _os.environ.get('GW_WORK', '/tmp/gw')
+TOOLS = _os.environ.get('GW_TOOLS', '/tmp/tools')
 import pandas as pd,gzip,sys
 ids=set(pd.read_csv(sys.argv[1],sep=r'\s+').SNP)
-bim=pd.read_csv('/tmp/tools/EUR.bim',sep='\t',header=None,names=['chr','rsid','cm','pos','a1','a2'],dtype={'chr':str})
+bim=pd.read_csv(f'{TOOLS}/EUR.bim',sep='\t',header=None,names=['chr','rsid','cm','pos','a1','a2'],dtype={'chr':str})
 b=bim[bim.rsid.isin(ids)].copy(); b['key']=b.chr+':'+b.pos.astype(str); keys=dict(zip(b.key,b.rsid))
 f,out,mode=sys.argv[2],sys.argv[3],sys.argv[4]
 with gzip.open(f,'rt') as fh, open(out,'w') as o:

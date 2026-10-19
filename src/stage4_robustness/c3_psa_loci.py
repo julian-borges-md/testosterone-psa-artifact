@@ -1,22 +1,25 @@
+import os as _os
+GW = _os.environ.get('GW_WORK', '/tmp/gw')
+TOOLS = _os.environ.get('GW_TOOLS', '/tmp/tools')
 import pandas as pd, numpy as np, sys, subprocess
-sys.path.insert(0,'/tmp/gw'); import mr
+sys.path.insert(0,GW); import mr
 from scipy import stats
 from scipy.optimize import minimize_scalar
 # GRCh37 1Mb windows around canonical prostate-cancer / PSA-biology loci
 LOCI=[('KLK3','19',50300000,52400000),('MSMB','10',50500000,52600000),('TERT','5',250000,2300000),
       ('HNF1B','17',35000000,37100000),('SHBG','17',6500000,8600000)]
-bim=pd.read_csv('/tmp/tools/EUR.bim',sep='\t',header=None,names=['chr','rsid','cm','pos','a1','a2'],dtype={'chr':str}).set_index('rsid')
+bim=pd.read_csv(f'{TOOLS}/EUR.bim',sep='\t',header=None,names=['chr','rsid','cm','pos','a1','a2'],dtype={'chr':str}).set_index('rsid')
 def flag(snps):
     r=bim.loc[snps]; m=pd.Series(False,index=snps)
     for g,c,a,b in LOCI: m |= ((r.chr==c)&(r.pos>=a)&(r.pos<=b)).values
     return m.values
 D=mr.load()
-clump={'biot':'/tmp/gw/biot_clump.clumped','psa':'/tmp/gw/psa_clump.clumped'}
+clump={'biot':f'{GW}/biot_clump.clumped','psa':f'{GW}/psa_clump.clumped'}
 def joint(names):
     u=pd.concat([pd.read_csv(clump[t],sep=r'\s+')[['SNP','P']] for t in names]).groupby('SNP',as_index=False).P.min()
-    u.to_csv('/tmp/gw/p4/jin.txt',sep='\t',index=False)
-    subprocess.run(['/tmp/tools/plink','--bfile','/tmp/tools/EUR','--clump','/tmp/gw/p4/jin.txt','--clump-p1','5e-8','--clump-p2','1','--clump-r2','0.001','--clump-kb','10000','--out','/tmp/gw/p4/jj','--silent','--memory','2000'],check=True)
-    return set(pd.read_csv('/tmp/gw/p4/jj.clumped',sep=r'\s+').SNP)
+    u.to_csv(f'{GW}/p4/jin.txt',sep='\t',index=False)
+    subprocess.run([f'{TOOLS}/plink','--bfile',f'{TOOLS}/EUR','--clump',f'{GW}/p4/jin.txt','--clump-p1','5e-8','--clump-p2','1','--clump-r2','0.001','--clump-kb','10000','--out',f'{GW}/p4/jj','--silent','--memory','2000'],check=True)
+    return set(pd.read_csv(f'{GW}/p4/jj.clumped',sep=r'\s+').SNP)
 def mvmr(m):
     X=np.column_stack([m.bx0,m.bx1]); w=1/m.sy.values**2; XtW=X.T*w
     b=np.linalg.solve(XtW@X,XtW@m.by.values); res=m.by.values-X@b; k=len(m)
@@ -40,5 +43,5 @@ for outc in ['prac','fg']:
             a=mr.ivw(*[mr.harmonise(D['biot'][D['biot'].SNP.isin(set(pd.read_csv(clump['biot'],sep=r'\s+').SNP))],D['psa'])[c].values for c in ['b_x','b_y','se_y']])[0]
             tot=mr.ivw(*[mr.harmonise(D['biot'][D['biot'].SNP.isin(set(pd.read_csv(clump['biot'],sep=r'\s+').SNP))],D['prac'])[c].values for c in ['b_x','b_y','se_y']])[0]
             print(f'  {lab}: PSA channel share = {a*b[1]/tot:.3f}')
-O=pd.DataFrame(out); O.to_csv('/tmp/gw/p4/c3_psa_loci_sensitivity.tsv',sep='\t',index=False)
+O=pd.DataFrame(out); O.to_csv(f'{GW}/p4/c3_psa_loci_sensitivity.tsv',sep='\t',index=False)
 pd.set_option('display.width',200); print(O.round(3).to_string(index=False))

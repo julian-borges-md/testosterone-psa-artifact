@@ -33,7 +33,7 @@ arr((4.4,3.12),(5.6,1.75),c=_style.PATH_BIOLOGY,ls='--'); ax.text(4.55,2.3,'biol
 arr((7.35,1.6),(8.25,2.35),c=_style.PATH_BIOLOGY,ls='--'); arr((7.35,1.2),(8.25,1.0),c=_style.PATH_BIOLOGY,ls='--')
 arr((2.05,1.6),(5.45,3.95),c=C['tt'],rad=-0.28); ax.text(3.6,2.1,'lowers PSA',color=C['tt'],rotation=22,ha='center')
 ax.text(5.2,0.1,'Solid path: PSA driven detection (supported). Dashed path: tumour biology (not demonstrated for lethal disease).',ha='center',style='italic')
-_style.check(fig,'Figure1_conceptual_model'); plt.savefig('figures/Figure1_conceptual_model.png',bbox_inches='tight'); plt.savefig('figures/Figure1_conceptual_model.pdf',bbox_inches='tight'); plt.close()
+_style.check(fig,'Figure1_conceptual_model'); plt.savefig('figures/Figure1_conceptual_model.png',bbox_inches='tight'); plt.savefig('figures/Figure1_conceptual_model.pdf',bbox_inches='tight'); plt.savefig('figures/Figure1_conceptual_model.eps',bbox_inches='tight'); plt.close()
 
 # ---------- Figure 2: saturation and free hormone test ----------
 rows=[('Bioavailable T, IVW',*mx('biot->psa','IVW'),C['biot']),
@@ -51,7 +51,7 @@ for yi,(lab,b,lo,hi,c) in zip(y,rows):
 ax.axvline(0,color='black',lw=0.8,ls=':')
 ax.set_yticks(y); ax.set_yticklabels([r[0] for r in rows]); ax.set_xlabel('Effect on PSA (natural log units per SD of exposure, 95% CI)')
 ax.text(0.003,len(rows)-0.4,'Saturation predicts zero',style='italic')
-plt.tight_layout(); _style.check(fig,'Figure2_saturation_test'); plt.savefig('figures/Figure2_saturation_test.png'); plt.savefig('figures/Figure2_saturation_test.pdf'); plt.close()
+plt.tight_layout(); _style.check(fig,'Figure2_saturation_test'); plt.savefig('figures/Figure2_saturation_test.png'); plt.savefig('figures/Figure2_saturation_test.pdf'); plt.savefig('figures/Figure2_saturation_test.eps'); plt.close()
 
 # ---------- Figure 3: detection signature ----------
 ex=[('Bioavailable\ntestosterone','biot',C['biot']),('BMI','bmi',C['bmi']),('IGF-1','igf',C['igf'])]
@@ -75,7 +75,7 @@ axs[0].set_yticks([2,1,0]); axs[0].set_yticklabels([e[0] for e in ex])
 # formally.
 _or = min(axs[1].get_xlim()[0], axs[2].get_xlim()[0]), max(axs[1].get_xlim()[1], axs[2].get_xlim()[1])
 axs[1].set_xlim(_or); axs[2].set_xlim(_or)
-plt.tight_layout(); _style.check(fig,'Figure3_detection_signature'); plt.savefig('figures/Figure3_detection_signature.png'); plt.savefig('figures/Figure3_detection_signature.pdf'); plt.close()
+plt.tight_layout(); _style.check(fig,'Figure3_detection_signature'); plt.savefig('figures/Figure3_detection_signature.png'); plt.savefig('figures/Figure3_detection_signature.pdf'); plt.savefig('figures/Figure3_detection_signature.eps'); plt.close()
 
 # ---------- Figure 4: trials and synthesis ----------
 fig,axs=plt.subplots(1,2,figsize=(_style.TWO_COLUMN,3.1),gridspec_kw={'width_ratios':[1,1.3]})

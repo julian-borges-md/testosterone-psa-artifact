@@ -1,7 +1,10 @@
+import os as _os
+GW = _os.environ.get('GW_WORK', '/tmp/gw')
+TOOLS = _os.environ.get('GW_TOOLS', '/tmp/tools')
 import pandas as pd,numpy as np,sys,subprocess
-sys.path.insert(0,'/tmp/gw'); import mr
+sys.path.insert(0,GW); import mr
 from scipy import stats
-ref=pd.read_csv('/tmp/tools/EUR.bim',sep='\t',header=None,names=['chr','rsid','cm','pos','a1','a2'],dtype={'chr':str}).set_index('rsid')[['a1','a2']]
+ref=pd.read_csv(f'{TOOLS}/EUR.bim',sep='\t',header=None,names=['chr','rsid','cm','pos','a1','a2'],dtype={'chr':str}).set_index('rsid')[['a1','a2']]
 def refcheck(d):
     d=d.join(ref,on='SNP'); d=d[((d.ea==d.a1)&(d.oa==d.a2))|((d.ea==d.a2)&(d.oa==d.a1))]; return d.drop(columns=['a1','a2'])
 L={}
@@ -11,11 +14,11 @@ x=pd.read_csv('mv_igf.tsv',sep='\t'); x.columns=[c.strip() for c in x.columns]; 
 x=pd.read_csv('mv_fi.tsv',sep='\t'); L['fi']=refcheck(mr.std(x,'effect_allele','other_allele','effect_allele_frequency','beta','standard_error','p_value')); L['fi']['n']=151013
 x=pd.read_csv('mv_prac.tsv',sep='\t'); x.columns=[c.strip() for c in x.columns]; L['prac']=refcheck(mr.std(x,'effect_allele','other_allele','effect_allele_frequency','beta','standard_error','p_value')); L['prac']['n']=140254
 x=pd.read_csv('mv_fg.tsv',sep='\t'); L['fg']=mr.std(x,'alt','ref','af_alt','beta','sebeta','pval'); L['fg']['n']=np.nan
-clump={'biot':'/tmp/gw/biot_clump.clumped','bmi':'bmi_clump.clumped','igf':'igf_clump.clumped','fi':'fi_clump.clumped'}
+clump={'biot':f'{GW}/biot_clump.clumped','bmi':'bmi_clump.clumped','igf':'igf_clump.clumped','fi':'fi_clump.clumped'}
 def joint(names):
     u=pd.concat([pd.read_csv(clump[t],sep=r'\s+')[['SNP','P']] for t in names]).groupby('SNP',as_index=False).P.min()
     u.to_csv('jin.txt',sep='\t',index=False)
-    subprocess.run(['/tmp/tools/plink','--bfile','/tmp/tools/EUR','--clump','jin.txt','--clump-p1','5e-8','--clump-p2','1','--clump-r2','0.001','--clump-kb','10000','--out','jj','--silent','--memory','2000'],check=True)
+    subprocess.run([f'{TOOLS}/plink','--bfile',f'{TOOLS}/EUR','--clump','jin.txt','--clump-p1','5e-8','--clump-p2','1','--clump-r2','0.001','--clump-kb','10000','--out','jj','--silent','--memory','2000'],check=True)
     return set(pd.read_csv('jj.clumped',sep=r'\s+').SNP)
 def build(names,out):
     snps=joint(names); base=L[names[0]][L[names[0]].SNP.isin(snps)]

@@ -1,6 +1,9 @@
+import os as _os
+GW = _os.environ.get('GW_WORK', '/tmp/gw')
+TOOLS = _os.environ.get('GW_TOOLS', '/tmp/tools')
 import numpy as np, pandas as pd, sys
 from scipy import stats, optimize
-sys.path.insert(0,'/tmp/gw'); import mr
+sys.path.insert(0,GW); import mr
 rng=np.random.default_rng(20261011)
 
 # ---------- MR cML (Xue, Shen, Pan 2021), BIC selection and model averaging ----------
@@ -59,7 +62,7 @@ def raps(bx,by,sx,sy,B=300):
         bs.append(raps_est(bx[i],by[i],sx[i],sy[i])[0])
     return th,np.std(bs),tau2
 
-D=mr.load(); inst={t:set(pd.read_csv(f'/tmp/gw/{t}_clump.clumped',sep=r'\s+').SNP) for t in ['biot','shbg','tt','psa']}
+D=mr.load(); inst={t:set(pd.read_csv(f'{GW}/{t}_clump.clumped',sep=r'\s+').SNP) for t in ['biot','shbg','tt','psa']}
 rows=[]
 for e,o,nmin in [('biot','psa',178782),('biot','prac',140254),('biot','fg',178782),('shbg','psa',180726),('tt','psa',194453),('psa','prac',140254)]:
     ex=D[e][D[e].SNP.isin(inst[e])]; m=mr.harmonise(ex,D[o])
@@ -70,5 +73,5 @@ for e,o,nmin in [('biot','psa',178782),('biot','prac',140254),('biot','fg',17878
     for meth,b,s in [('IVW (reference)',ivw[0],ivw[1]),('MR cML BIC',c['theta_bic'],c['se_bic']),('MR cML model averaged',c['theta_ma'],c['se_ma']),('MR RAPS Huber',rt,rse)]:
         rows.append(dict(analysis=f'{e}->{o}',method=meth,nsnp=len(m),beta=b,se=s,lo=b-1.96*s,hi=b+1.96*s,p=2*stats.norm.sf(abs(b/s)),K_invalid=c['K_bic'] if 'cML' in meth else np.nan,tau2=tau2 if 'RAPS' in meth else np.nan))
     print(e,o,'done',flush=True)
-R=pd.DataFrame(rows); R.to_csv('/tmp/gw/p2/robust_cml_raps.tsv',sep='\t',index=False)
+R=pd.DataFrame(rows); R.to_csv(f'{GW}/p2/robust_cml_raps.tsv',sep='\t',index=False)
 pd.set_option('display.width',220); print(R.round(4).to_string(index=False))

@@ -176,7 +176,7 @@ This repository documents its own defects rather than omitting them.
 
 | ID | Limitation |
 |---|---|
-| L1 | Pipeline scripts use the absolute paths of the original execution environment (`/tmp/gw`, `/tmp/tools`). [`docs/RUNBOOK.md`](docs/RUNBOOK.md) reproduces them with symbolic links. Refactoring to configurable paths is pending |
+| L1 | **Retired 19 October 2026.** Pipeline scripts used the absolute paths of the original execution environment. Both roots are now read from `GW_WORK` and `GW_TOOLS`, defaulting to those original values, so the symbolic link route in [`docs/RUNBOOK.md`](docs/RUNBOOK.md) still works and is no longer required. The committed results were produced before this edit, which changes no analysis |
 | L2 | Lethal prostate cancer is untested. Equivalence at OR 1.10 needs about 40,000 fatal cases; no public GWAS approaches this |
 | L3 | Prespecification is internal: decision rules are time stamped in the committed log and repository, but not registered with OSF or PROSPERO |
 | L3b | CAUSE nuisance parameters were estimated from 100,000 rather than 1,000,000 variants (3 GB memory limit); this affects their precision, not the model comparison. CAUSE 1.2.0 required two source patches to run under R 4.3.3 ([docs/CAUSE_PATCHES.md](docs/CAUSE_PATCHES.md)) |

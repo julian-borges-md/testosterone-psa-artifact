@@ -1,8 +1,11 @@
+import os as _os
+GW = _os.environ.get('GW_WORK', '/tmp/gw')
+TOOLS = _os.environ.get('GW_TOOLS', '/tmp/tools')
 import pandas as pd,gzip,sys
 ids=set()
 for t in ['biot','shbg','tt','psa']:
     c=pd.read_csv(f'{t}_clump.clumped',sep=r'\s+'); ids|=set(c.SNP)
-bim=pd.read_csv('/tmp/tools/EUR.bim',sep='\t',header=None,names=['chr','rsid','cm','pos','a1','a2'],dtype={'chr':str})
+bim=pd.read_csv(f'{TOOLS}/EUR.bim',sep='\t',header=None,names=['chr','rsid','cm','pos','a1','a2'],dtype={'chr':str})
 b=bim[bim.rsid.isin(ids)].copy(); b['key']=b.chr+':'+b.pos.astype(str)
 b.to_csv('union_snps.tsv',sep='\t',index=False)
 keys=dict(zip(b.key,b.rsid)); rs=set(b.rsid)

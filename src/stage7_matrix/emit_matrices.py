@@ -1,3 +1,6 @@
+import os as _os
+GW = _os.environ.get('GW_WORK', '/tmp/gw')
+TOOLS = _os.environ.get('GW_TOOLS', '/tmp/tools')
 """Write the regenerated estimator matrices into the repository as committed
 result tables, one row per cell, so that every printed cell has a machine
 readable source and the assertion module can check all of them.
@@ -11,7 +14,7 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 
-OUT = "/tmp/gw/out"
+OUT = f"{GW}/out"
 REPO = sys.argv[1]
 DEST = os.path.join(REPO, "results", "stage7_matrix")
 os.makedirs(DEST, exist_ok=True)

@@ -1,3 +1,6 @@
+import os as _os
+GW = _os.environ.get('GW_WORK', '/tmp/gw')
+TOOLS = _os.environ.get('GW_TOOLS', '/tmp/tools')
 """Pass B: regenerate the robust estimator rows for every cell of the estimator
 matrix from one run.
 
@@ -29,11 +32,11 @@ import numpy as np
 import pandas as pd
 from scipy import optimize, stats
 
-os.chdir("/tmp/gw")
-sys.path.insert(0, "/tmp/gw")
+os.chdir(GW)
+sys.path.insert(0, GW)
 import mr
 
-OUT = "/tmp/gw/out"
+OUT = f"{GW}/out"
 os.makedirs(OUT, exist_ok=True)
 SEED_MAIN = 20261011
 SEED_DP = 7

@@ -1,3 +1,6 @@
+import os as _os
+GW = _os.environ.get('GW_WORK', '/tmp/gw')
+TOOLS = _os.environ.get('GW_TOOLS', '/tmp/tools')
 import pandas as pd,numpy as np,mr,subprocess
 from scipy import stats
 from scipy.optimize import minimize_scalar
@@ -9,7 +12,7 @@ def joint(names,out):
         c=pd.read_csv(f'{t}_clump.clumped',sep=r'\s+')[['SNP','P']]; frames.append(c)
     u=pd.concat(frames).groupby('SNP',as_index=False).P.min()
     u.to_csv('j_in.txt',sep='\t',index=False)
-    subprocess.run(['/tmp/tools/plink','--bfile','/tmp/tools/EUR','--clump','j_in.txt','--clump-p1','5e-8','--clump-p2','1','--clump-r2','0.001','--clump-kb','10000','--out','j','--silent','--memory','2500'],check=True)
+    subprocess.run([f'{TOOLS}/plink','--bfile',f'{TOOLS}/EUR','--clump','j_in.txt','--clump-p1','5e-8','--clump-p2','1','--clump-r2','0.001','--clump-kb','10000','--out','j','--silent','--memory','2500'],check=True)
     snps=set(pd.read_csv('j.clumped',sep=r'\s+').SNP)
     base=D[names[0]][D[names[0]].SNP.isin(snps)]
     m=mr.harmonise(base,D[out]).rename(columns={'b_x':'bx0','se_x':'sx0','b_y':'by','se_y':'sy'})[['SNP','ea_x','oa_x','bx0','sx0','by','sy']]

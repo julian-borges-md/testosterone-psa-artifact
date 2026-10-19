@@ -1,9 +1,12 @@
+import os as _os
+GW = _os.environ.get('GW_WORK', '/tmp/gw')
+TOOLS = _os.environ.get('GW_TOOLS', '/tmp/tools')
 """CAUSE needs genome-wide summary statistics for both traits, not just instruments.
 We extract a common SNP set with p-value based pruning, as CAUSE's own workflow does:
 all variants present in both files, then LD pruning on the instrument reference.
 """
 import gzip, pandas as pd, numpy as np, sys
-bim=pd.read_csv('/tmp/tools/EUR.bim',sep='\t',header=None,names=['chr','rsid','cm','pos','a1','a2'],dtype={'chr':str})
+bim=pd.read_csv(f'{TOOLS}/EUR.bim',sep='\t',header=None,names=['chr','rsid','cm','pos','a1','a2'],dtype={'chr':str})
 bim=bim[bim.a1.str.len().eq(1)&bim.a2.str.len().eq(1)]
 bim['key']=bim.chr+':'+bim.pos.astype(str)
 keep_rs=set(bim.rsid); key2rs=dict(zip(bim.key,bim.rsid))
@@ -30,6 +33,6 @@ def stream(path, out, mode, cols):
     print(out,n,flush=True)
 job=sys.argv[1]
 base=['effect_allele','other_allele','beta','standard_error']
-if job=='biot': stream('/tmp/gw/biot_m.tsv.gz','/tmp/gw/p6/biot.tsv','rs',base)
-if job=='psa':  stream('/tmp/gw/psa.tsv.gz','/tmp/gw/p6/psa.tsv','key',base+['chromosome','base_pair_location'])
-if job=='prac': stream('/tmp/gw/pca_practical.tsv.gz','/tmp/gw/p6/prac.tsv','key',base+['chromosome','base_pair_location'])
+if job=='biot': stream(f'{GW}/biot_m.tsv.gz',f'{GW}/p6/biot.tsv','rs',base)
+if job=='psa':  stream(f'{GW}/psa.tsv.gz',f'{GW}/p6/psa.tsv','key',base+['chromosome','base_pair_location'])
+if job=='prac': stream(f'{GW}/pca_practical.tsv.gz',f'{GW}/p6/prac.tsv','key',base+['chromosome','base_pair_location'])

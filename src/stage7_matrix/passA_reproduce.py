@@ -1,3 +1,6 @@
+import os as _os
+GW = _os.environ.get('GW_WORK', '/tmp/gw')
+TOOLS = _os.environ.get('GW_TOOLS', '/tmp/tools')
 """Pass A: replay src/stage1_saturation/run1.py verbatim against the committed
 union instrument set, then compare every cell against the committed
 results/stage1/mr_results.tsv and mr_diagnostics.tsv.
@@ -9,12 +12,12 @@ import os, sys
 import numpy as np
 import pandas as pd
 
-os.chdir("/tmp/gw")
-sys.path.insert(0, "/tmp/gw")
+os.chdir(GW)
+sys.path.insert(0, GW)
 import mr
 
 REPO = sys.argv[1]
-OUT = "/tmp/gw/out"
+OUT = f"{GW}/out"
 os.makedirs(OUT, exist_ok=True)
 
 D = mr.load()

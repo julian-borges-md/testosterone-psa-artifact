@@ -1,7 +1,10 @@
+import os as _os
+GW = _os.environ.get('GW_WORK', '/tmp/gw')
+TOOLS = _os.environ.get('GW_TOOLS', '/tmp/tools')
 import pandas as pd,numpy as np,sys
-sys.path.insert(0,'/tmp/gw'); import mr
-bim=pd.read_csv('/tmp/gw/union_snps.tsv',sep='\t')  # not needed
-ref=pd.read_csv('/tmp/tools/EUR.bim',sep='\t',header=None,names=['chr','rsid','cm','pos','a1','a2'],dtype={'chr':str})
+sys.path.insert(0,GW); import mr
+bim=pd.read_csv(f'{GW}/union_snps.tsv',sep='\t')  # not needed
+ref=pd.read_csv(f'{TOOLS}/EUR.bim',sep='\t',header=None,names=['chr','rsid','cm','pos','a1','a2'],dtype={'chr':str})
 x=pd.read_csv('p2/r_prac.tsv',sep='\t'); x.columns=[c.strip() for c in x.columns]
 p=mr.std(x,'effect_allele','other_allele','effect_allele_frequency','beta','standard_error','p_value')
 r=ref[ref.rsid.isin(p.SNP)].set_index('rsid')[['a1','a2']]

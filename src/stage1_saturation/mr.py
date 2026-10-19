@@ -1,7 +1,10 @@
+import os as _os
+GW = _os.environ.get('GW_WORK', '/tmp/gw')
+TOOLS = _os.environ.get('GW_TOOLS', '/tmp/tools')
 import pandas as pd, numpy as np
 from scipy import stats
 rng=np.random.default_rng(20261009)
-bim=pd.read_csv('/tmp/gw/union_snps.tsv',sep='\t',dtype={'chr':str})
+bim=pd.read_csv(f'{GW}/union_snps.tsv',sep='\t',dtype={'chr':str})
 def std(df,ea,oa,eaf,b,se,p):
     d=pd.DataFrame({'SNP':df.SNP,'ea':df[ea].astype(str).str.upper(),'oa':df[oa].astype(str).str.upper(),
        'eaf':pd.to_numeric(df[eaf],errors='coerce'),'b':pd.to_numeric(df[b],errors='coerce'),'se':pd.to_numeric(df[se],errors='coerce'),'p':pd.to_numeric(df[p],errors='coerce')})
