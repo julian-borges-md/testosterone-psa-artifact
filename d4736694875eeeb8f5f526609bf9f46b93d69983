@@ -1,0 +1,1 @@
+Subject should have read: Bring the figures to the publisher's digital art specification. The release notes were passed as the whole commit message, so the first paragraph became the subject line. Not amended: rewriting this commit would orphan the v6.7 tag, and recreating the release is forbidden by the remediation procedure because it mints a new deposit identifier.
