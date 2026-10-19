@@ -101,6 +101,40 @@ try:
 finally:
     shutil.rmtree(tmp, ignore_errors=True)
 
+# -- check_manuscript.py: an oversized figure -------------------------------
+# The figure gate is silent on a conforming set, so a pass proves nothing about
+# it. Halving a figure's stated resolution doubles its publication size.
+tmp = tempfile.mkdtemp()
+try:
+    for d in ("manuscript", "results", "docs", "figures", "src"):
+        if os.path.isdir(d):
+            shutil.copytree(d, os.path.join(tmp, d))
+    for f in ("CITATION.cff", "README.md"):
+        if os.path.isfile(f):
+            shutil.copy(f, os.path.join(tmp, f))
+    import struct, zlib
+    target = None
+    for f in sorted(os.listdir(os.path.join(tmp, "figures"))):
+        if f.endswith(".png"):
+            target = os.path.join(tmp, "figures", f)
+            break
+    if target is None:
+        FAILURES.append("check_manuscript.py: no figure to perturb")
+    else:
+        raw = open(target, "rb").read()
+        i = raw.find(b"pHYs")
+        ppm = int(round(300 / 0.0254))
+        body = raw[i:i + 4] + struct.pack(">II", ppm, ppm) + raw[i + 12:i + 13]
+        crc = zlib.crc32(body) & 0xffffffff
+        open(target, "wb").write(
+            raw[:i] + body + struct.pack(">I", crc) + raw[i + 17:])
+        expect_nonzero("check_manuscript.py figure gate",
+                       [sys.executable, "src/check_manuscript.py",
+                        "manuscript/manuscript_v6.0.md"], cwd=tmp,
+                       saying="figure: ")
+finally:
+    shutil.rmtree(tmp, ignore_errors=True)
+
 if FAILURES:
     print("\nSELFTEST FAILED:", file=sys.stderr)
     for f in FAILURES:

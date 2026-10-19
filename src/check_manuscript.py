@@ -775,6 +775,72 @@ for _sent in re.split(r"(?<=[.!?])\s+", main_text):
                      "with no bound in the same sentence: %r"
                      % " ".join(_sent.split())[:140])
 
+# -- figure conformance -----------------------------------------------------
+# The Endocrine Society Digital Art Guidelines fix the publication size: one
+# column 3.25 in, two column 5.8 in, height at most 9.25 in, submitted at final
+# size and not scaled. Every figure in this repository was over the two column
+# width until 19 October, the widest by 76 per cent, which would have had
+# production scale an 8 point label to 4.8 point. figures/_style.py refuses to
+# write an oversized figure, but that only runs when the figures are rebuilt.
+# This reads what is actually committed.
+#
+# The PNG header is parsed directly rather than through an imaging library, so
+# the check adds no dependency: IHDR carries the pixel dimensions and pHYs the
+# pixels per unit, with unit 1 meaning metres.
+FIG_MAX_W_IN = 5.8
+FIG_MAX_H_IN = 9.25
+FIG_MIN_DPI = 600
+
+
+def _png_geometry(path):
+    with open(path, "rb") as fh:
+        if fh.read(8) != b"\x89PNG\r\n\x1a\n":
+            return None
+        px = py = wid = hgt = None
+        while True:
+            head = fh.read(8)
+            if len(head) < 8:
+                break
+            ln = int.from_bytes(head[:4], "big")
+            typ = head[4:8]
+            data = fh.read(ln)
+            fh.read(4)
+            if typ == b"IHDR":
+                wid = int.from_bytes(data[0:4], "big")
+                hgt = int.from_bytes(data[4:8], "big")
+            elif typ == b"pHYs" and data[8] == 1:
+                px = int.from_bytes(data[0:4], "big") * 0.0254
+                py = int.from_bytes(data[4:8], "big") * 0.0254
+            elif typ == b"IDAT":
+                break
+        if None in (wid, hgt, px, py) or px <= 0 or py <= 0:
+            return None
+        return wid / px, hgt / py, px
+
+
+_figdir = os.path.join(ROOT, "figures")
+if os.path.isdir(_figdir):
+    for _f in sorted(os.listdir(_figdir)):
+        if not _f.endswith(".png"):
+            continue
+        n += 1
+        _geom = _png_geometry(os.path.join(_figdir, _f))
+        if _geom is None:
+            fails.append("figure: %s carries no resolution, so its publication "
+                         "size cannot be checked" % _f)
+            continue
+        _w, _h, _dpi = _geom
+        if _w > FIG_MAX_W_IN + 0.01:
+            fails.append("figure: %s is %.2f in wide at its stated resolution, "
+                         "over the %.2f in two column maximum" % (_f, _w, FIG_MAX_W_IN))
+        elif _h > FIG_MAX_H_IN + 0.01:
+            fails.append("figure: %s is %.2f in tall, over the %.2f in maximum"
+                         % (_f, _h, FIG_MAX_H_IN))
+        elif _dpi < FIG_MIN_DPI - 1:
+            fails.append("figure: %s is %d dpi, under the %d dpi the guidelines "
+                         "give for a figure carrying line art and text"
+                         % (_f, round(_dpi), FIG_MIN_DPI))
+
 # -- title page concordance -------------------------------------------------
 # The title page states six counts and closes by claiming they are asserted
 # mechanically and cannot drift. Nothing read that page until this gate existed,
