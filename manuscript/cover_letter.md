@@ -9,7 +9,7 @@ jyborges@bu.edu | ORCID 0009-0001-9929-3135
 
 Dear Editors,
 
-I am submitting "Testosterone Raises PSA, and Much of Its Apparent Prostate Cancer Risk Runs Through That Channel" for consideration as a Research Article.
+I am submitting "Testosterone Raises PSA Across the Physiological Range, with Implications for Detection Bias in Prostate Cancer" for consideration as a Research Article.
 
 The mechanism is the premise of the design rather than an inference from it. Prostate specific antigen is transcribed under direct androgen receptor control, which is what makes it an in vivo bioassay of prostatic androgen signalling rather than a correlate of one, and the completed STROBE-MR checklist accompanies the submission with every item addressed.
 

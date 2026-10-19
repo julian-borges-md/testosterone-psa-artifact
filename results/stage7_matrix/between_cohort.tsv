@@ -1,0 +1,8 @@
+estimator	or_screen_detected	or_registry	difference_log_odds	se_difference	z	p	cochran_q	i2_percent	direction_as_predicted
+IVW	1.1926	1.0538	0.1238	0.0927	1.335	0.1817	1.783	43.9	yes
+MR Egger	1.0966	0.845	0.26068	0.18725	1.392	0.1639	1.938	48.4	yes
+Weighted median	1.1265	0.9838	0.13545	0.09673	1.4	0.1614	1.961	49.0	yes
+Weighted mode	1.1081	0.9597	0.14378	0.10917	1.317	0.1878	1.735	42.4	yes
+IVW, Q outliers removed	1.1526	0.9742	0.1682	0.07635	2.203	0.0276	4.853	79.4	yes
+MR cML BIC (DP SE)	1.155	0.961	0.18385	0.07914	2.323	0.0202	5.397	81.5	yes
+MR RAPS Huber	1.1603	0.9685	0.18068	0.10012	1.805	0.0711	3.256	69.3	yes

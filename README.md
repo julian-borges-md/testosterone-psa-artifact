@@ -7,7 +7,7 @@
 
 ---
 
-# Testosterone Raises PSA, and Much of Its Apparent Prostate Cancer Risk Runs Through That Channel
+# Testosterone Raises PSA Across the Physiological Range, with Implications for Detection Bias in Prostate Cancer
 
 ### Evidence from Mendelian randomization, Bayesian synthesis and randomized trials
 
@@ -215,7 +215,7 @@ No controlled access or patient identifiable data is used or redistributed here.
 
 ## Citation
 
-> Borges, Julian. *Testosterone Raises PSA, and Much of Its Apparent Prostate Cancer Risk Runs Through That Channel.* 2026. https://github.com/julian-borges-md/testosterone-psa-artifact
+> Borges, Julian. *Testosterone Raises PSA Across the Physiological Range, with Implications for Detection Bias in Prostate Cancer.* 2026. https://github.com/julian-borges-md/testosterone-psa-artifact
 
 Archived at [https://doi.org/10.5281/zenodo.23352541](https://doi.org/10.5281/zenodo.23352541) (version v6.4). The concept DOI [10.5281/zenodo.23324218](https://doi.org/10.5281/zenodo.23324218) always resolves to the latest version. Machine readable metadata in [`CITATION.cff`](CITATION.cff).
 

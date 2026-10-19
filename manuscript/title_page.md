@@ -1,6 +1,6 @@
 # Title page
 
-**Title.** Testosterone Raises PSA, and Much of Its Apparent Prostate Cancer Risk Runs Through That Channel
+**Title.** Testosterone Raises PSA Across the Physiological Range, with Implications for Detection Bias in Prostate Cancer
 
 **Running head.** Testosterone, PSA and prostate cancer detection
 
