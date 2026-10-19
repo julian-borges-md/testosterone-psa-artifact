@@ -6,7 +6,7 @@
 #                      claim consistency, count qualification and supplementary gates
 #   make submission    the above plus the unresolved placeholder gate
 #   make crossvalidate compare every estimator against a published package (needs R)
-#   make selftest      prove that verify fails on perturbed input
+#   make selftest      prove the assertion modules still fail on perturbed input
 #   make figures       regenerate the display figures from committed results
 #   make docx          build the Word versions of the documents (needs pandoc)
 #   make archive-snapshot TAG=v6.3 DOI=10.5281/zenodo.N
