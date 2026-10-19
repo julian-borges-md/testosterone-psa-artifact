@@ -4,8 +4,11 @@
 # guidelines on the date in the venue record, never from memory.
 #
 # Current venue: the manuscript is prepared for a journal that publishes no
-# word, figure or table limit, caps the abstract at 250 words and caps the
-# title at 120 characters and spaces.
+# word, figure or table limit for its research article type, asks for an
+# abstract under 250 words, and caps the title at 120 characters and spaces.
+# The abstract ceiling is recorded as 249 rather than 250 because the guideline
+# is stated as fewer than 250 words, not as a limit of 250. No maximum number
+# of references, figures or tables is published, so those checks do not run.
 main_text_words	
-abstract_words	250
+abstract_words	249
 title_characters	120
