@@ -38,8 +38,8 @@ identifiers:
     value: 10.5281/zenodo.23324218
     description: Concept DOI, always resolves to the latest version
   - type: doi
-    value: 10.5281/zenodo.23482970
-    description: Archived snapshot of version v6.5
+    value: 10.5281/zenodo.23483135
+    description: Archived snapshot of version v6.6
   - type: doi
     value: 10.5281/zenodo.23351818
     description: Archived snapshot of version v6.3

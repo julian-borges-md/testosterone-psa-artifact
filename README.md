@@ -217,7 +217,7 @@ No controlled access or patient identifiable data is used or redistributed here.
 
 > Borges, Julian. *Testosterone Raises PSA Across the Physiological Range, with Implications for Detection Bias in Prostate Cancer.* 2026. https://github.com/julian-borges-md/testosterone-psa-artifact
 
-Archived at [https://doi.org/10.5281/zenodo.23482970](https://doi.org/10.5281/zenodo.23482970) (version v6.5). The concept DOI [10.5281/zenodo.23324218](https://doi.org/10.5281/zenodo.23324218) always resolves to the latest version. Machine readable metadata in [`CITATION.cff`](CITATION.cff).
+Archived at [https://doi.org/10.5281/zenodo.23483135](https://doi.org/10.5281/zenodo.23483135) (version v6.6). The concept DOI [10.5281/zenodo.23324218](https://doi.org/10.5281/zenodo.23324218) always resolves to the latest version. Machine readable metadata in [`CITATION.cff`](CITATION.cff).
 
 ---
 

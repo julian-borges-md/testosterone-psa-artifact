@@ -35,7 +35,7 @@ Third, the limitations are stated with the expected direction of bias for every 
 
 What the study does not show is stated as plainly. No public data set has enough fatal cases to test whether androgens affect lethal prostate cancer; detecting an odds ratio of 1.19 for aggressive disease would need about 40,000 fatal cases. That question is named as the priority for future work rather than answered here.
 
-The manuscript is original, is not under consideration elsewhere and has not been published previously. All data analysed are publicly available and no controlled access or patient identifiable data were used or redistributed. The analysis code is openly released under an MIT licence and archived at https://doi.org/10.5281/zenodo.23482970. I have no conflicts of interest to declare and received no funding for this work. The completed STROBE-MR checklist accompanies the submission.
+The manuscript is original, is not under consideration elsewhere and has not been published previously. All data analysed are publicly available and no controlled access or patient identifiable data were used or redistributed. The analysis code is openly released under an MIT licence and archived at https://doi.org/10.5281/zenodo.23483135. I have no conflicts of interest to declare and received no funding for this work. The completed STROBE-MR checklist accompanies the submission.
 
 Thank you for considering this manuscript.
 
