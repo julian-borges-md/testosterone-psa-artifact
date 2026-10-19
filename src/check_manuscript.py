@@ -555,9 +555,11 @@ for rel in POLARITY:
                          f"threshold model")
 
 # -- gate 10: the absence limit travels with every summary ------------------
-# The manuscript's conclusion is bounded on both sides: much of the apparent
+# The manuscript's conclusion is bounded on both sides: part of the apparent
 # risk runs through detection, AND the evidence does not establish absence of
-# effect. A summary that keeps the first half and drops the second is a
+# effect. The first half was itself overstated as "much" until 19 October and is
+# now held to a bound by the share claim gate below. A summary that keeps the
+# first half and drops the second is a
 # stronger paper than the one submitted, and the data availability statement
 # sends readers to these documents. The positive requirement is the property
 # doing the work here; the two denied strings are the historical forms this
