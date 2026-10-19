@@ -746,6 +746,33 @@ if LIMITS["title_characters"] and len(title) > LIMITS["title_characters"]:
     fails.append(f"journal limit: the title is {len(title)} characters, over the "
                  f"{LIMITS['title_characters']} character limit")
 
+# -- share claims must carry a bound ---------------------------------------
+# The first editorial comment was that the conclusions overstated the evidence,
+# and the title was corrected on 19 October. The same claim survived in two
+# Discussion sentences, "much of the genetic evidence" and "much of its apparent
+# cancer risk", each asserting a majority share that the committed range of 32.5
+# to 50.2 per cent does not support at its lower end. A denylist of phrases would
+# have caught one wording and missed the other, so this is a property: a sentence
+# that asserts a magnitude about the channel must carry a bound in the same
+# sentence. Widen MAGNITUDE or SUBJECT, never add an exception for a wording.
+MAGNITUDE = ("much", "most", "majority", "largely", "predominantly", "mostly",
+             "the bulk")
+SUBJECT = ("psa channel", "genetic signal", "genetic evidence", "that channel",
+           "apparent cancer risk", "apparent risk", "apparent effect")
+BOUNDING = ("part of", "a part", "between", "per cent", "%", "upper bound",
+            "how much", "range")
+for _sent in re.split(r"(?<=[.!?])\s+", main_text):
+    _low = _sent.lower()
+    if not any(re.search(r"\b%s\b" % _m, _low) for _m in MAGNITUDE):
+        continue
+    if not any(_s in _low for _s in SUBJECT):
+        continue
+    n += 1
+    if not any(_b in _low for _b in BOUNDING):
+        fails.append("share claim: a magnitude is asserted about the PSA channel "
+                     "with no bound in the same sentence: %r"
+                     % " ".join(_sent.split())[:140])
+
 # -- title page concordance -------------------------------------------------
 # The title page states six counts and closes by claiming they are asserted
 # mechanically and cannot drift. Nothing read that page until this gate existed,

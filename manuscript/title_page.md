@@ -23,7 +23,7 @@ ORCID: 0009-0001-9929-3135
 
 **Article type.** Research Article
 
-**Counts.** Title 111 characters. Main text 3,303 words. Abstract 248 words excluding the four headings. 6 tables, 2 figures, 33 references.
+**Counts.** Title 111 characters. Main text 3,423 words. Abstract 248 words excluding the four headings. 6 tables, 2 figures, 34 references.
 
 **Keywords.** testosterone; prostate cancer; prostate specific antigen; Mendelian randomization; androgen saturation model; detection bias
 

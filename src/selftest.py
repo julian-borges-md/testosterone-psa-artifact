@@ -73,6 +73,34 @@ try:
 finally:
     shutil.rmtree(tmp, ignore_errors=True)
 
+# -- check_manuscript.py: an unbounded share claim --------------------------
+# The gate is inert on a correct manuscript, so a pass proves nothing about it.
+# This case restores the wording the gate exists to catch.
+tmp = tempfile.mkdtemp()
+try:
+    for d in ("manuscript", "results", "docs", "figures", "src"):
+        if os.path.isdir(d):
+            shutil.copytree(d, os.path.join(tmp, d))
+    for f in ("CITATION.cff", "README.md"):
+        if os.path.isfile(f):
+            shutil.copy(f, os.path.join(tmp, f))
+    ms = os.path.join(tmp, "manuscript", "manuscript_v6.0.md")
+    body = io.open(ms, encoding="utf-8").read()
+    moved = body.replace("part of its apparent cancer risk",
+                         "much of its apparent cancer risk", 1)
+    if moved == body:
+        FAILURES.append("check_manuscript.py: the conclusion no longer carries "
+                        "the bounded share wording, so there was nothing to "
+                        "perturb; update this case to the current wording")
+    else:
+        io.open(ms, "w", encoding="utf-8").write(moved)
+        expect_nonzero("check_manuscript.py share gate",
+                       [sys.executable, "src/check_manuscript.py",
+                        "manuscript/manuscript_v6.0.md"], cwd=tmp,
+                       saying="share claim: a magnitude is asserted")
+finally:
+    shutil.rmtree(tmp, ignore_errors=True)
+
 if FAILURES:
     print("\nSELFTEST FAILED:", file=sys.stderr)
     for f in FAILURES:
