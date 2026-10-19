@@ -3,11 +3,11 @@
 # Hashes are of the file with every DOI and version tag masked, so the
 # commit that updates the citation after the tag is cut cannot register
 # as drift while any other change does.
-tag	v6.4
-version_doi	10.5281/zenodo.23352541
-file	manuscript/manuscript_v6.0.md	c6782618ca8e517a426ceb8a52b78e84a0e2fb79d58a1ded3eb4e877cc5c3744
-file	manuscript/supplementary_v6.0.md	ecc9f8ac2064388227b94bebd6caa6a4fc122df66dec9b22d9eeb554ce5bf913
-file	manuscript/STROBE-MR_checklist.md	e83557f0d080a6834cf85814893864b108ef986eb3acbe4ba9e4c7dc576cfbf5
+tag	v6.5
+version_doi	10.5281/zenodo.23482970
+file	manuscript/manuscript_v6.0.md	6c0471cfb7c7d4d74359b23ad87b0f9a9ba6d018990bd61db88ad1f0421a1190
+file	manuscript/supplementary_v6.0.md	8ee3de6ed4eb3299c29bc6ef7f11a35edc12997ed17aa4e62ac203666a2ac07a
+file	manuscript/STROBE-MR_checklist.md	7cf961a071042474857a69e97a3564ad220a1bb0cf2ff4fa4b9878046aece1f9
 file	figures/make_figures.py	c9d840220aa967a67dcdbca2f47febb1ec409911f3cd5bc53c9088e1200b33ff
 file	figures/make_figure_saturation_full.py	e69afc855bc5b7ae91e77c5170f81ec6aecbf323d655a30b088f0000739c64ed
 file	figures/data/Figure1_saturation_full_matrix_data.tsv	e18ab48defa4e85dc24a3543768f2cb664916782486070bd3f432c4f907ba390

@@ -31,6 +31,6 @@ ORCID: 0009-0001-9929-3135
 
 **Mechanistic basis.** Prostate specific antigen is transcribed under direct androgen receptor control, which is why it serves here as an in vivo bioassay of prostatic androgen signalling rather than as a correlate.
 
-**Data and code.** github.com/julian-borges-md/testosterone-psa-artifact at tag v6.4, under an MIT licence, archived at https://doi.org/10.5281/zenodo.23352541.
+**Data and code.** github.com/julian-borges-md/testosterone-psa-artifact at tag v6.5, under an MIT licence, archived at https://doi.org/10.5281/zenodo.23482970.
 
 **Note on the counts above.** Every number on this page is asserted mechanically by `src/check_manuscript.py` in the analysis repository and is regenerated whenever the manuscript changes, so it cannot drift from the document it describes.
