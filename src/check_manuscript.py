@@ -776,7 +776,7 @@ for _sent in re.split(r"(?<=[.!?])\s+", main_text):
                      % " ".join(_sent.split())[:140])
 
 # -- figure conformance -----------------------------------------------------
-# The Endocrine Society Digital Art Guidelines fix the publication size: one
+# The target journal's digital art guidelines fix the publication size: one
 # column 3.25 in, two column 5.8 in, height at most 9.25 in, submitted at final
 # size and not scaled. Every figure in this repository was over the two column
 # width until 19 October, the widest by 76 per cent, which would have had

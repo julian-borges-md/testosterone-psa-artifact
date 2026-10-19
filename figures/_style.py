@@ -1,6 +1,6 @@
-"""Figure style conforming to the Endocrine Society Digital Art Guidelines.
+"""Figure style conforming to the target journal's digital art guidelines.
 
-The guidelines this encodes, so a reader can check the code against them:
+What the guidelines require, so a reader can check the code against them:
 
   Width      one column 3.25 in, two column 5.8 in. Submit at final publication
              size and do not scale. Height at most 9.25 in.

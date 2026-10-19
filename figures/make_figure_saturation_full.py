@@ -3,7 +3,7 @@ all three exposures, so the figure matches the completeness commitment made in
 the Table 2 caption.
 
 Laid out as three stacked panels rather than three side by side. At the
-Society's two column width of 5.8 inches, three panels in a row leave about
+published two column width of 5.8 inches, three panels in a row leave about
 1.5 inches of plot area each, which is not enough for the estimator labels at
 8 point. Stacking spends the height allowance instead, which is 9.25 inches
 and was previously unused."""

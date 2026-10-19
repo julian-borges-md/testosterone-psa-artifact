@@ -4,7 +4,7 @@
 
 Julian Borges, MD, MS.
 
-Every value in this document is re-derived from the committed inputs by the verification modules described in Supplementary Methods, section 7. The repository is at github.com/julian-borges-md/testosterone-psa-artifact, at tag v6.6, archived at https://doi.org/10.5281/zenodo.23483135.
+Every value in this document is re-derived from the committed inputs by the verification modules described in Supplementary Methods, section 7. The repository is at github.com/julian-borges-md/testosterone-psa-artifact, at tag v6.7, archived at https://doi.org/10.5281/zenodo.23485093.
 
 **Supplementary Methods**
 
