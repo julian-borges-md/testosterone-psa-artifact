@@ -1,6 +1,6 @@
 """Proves the assertion modules can fail.
 
-Five perturbations, each in a temporary copy so the tree is never touched.
+Six perturbations, each in a temporary copy so the tree is never touched.
 A module that cannot fail asserts nothing, so every module whose output is
 quoted as evidence needs a case here.
 
@@ -9,6 +9,7 @@ quoted as evidence needs a case here.
   check_manuscript.py a bounded share claim is restored to its unbounded wording
   check_manuscript.py a figure's stated resolution is halved
   check_manuscript.py a figure script is relaid out and its description is not
+  check_manuscript.py one document is left citing the previous deposit
 """
 import io, os, re, shutil, subprocess, sys, tempfile
 import pandas as pd
@@ -173,6 +174,36 @@ try:
                        [sys.executable, "src/check_manuscript.py",
                         "manuscript/manuscript_v6.0.md"], cwd=tmp,
                        saying="the description says otherwise")
+finally:
+    shutil.rmtree(tmp, ignore_errors=True)
+
+
+# -- check_manuscript.py: one document left on the previous deposit ---------
+# The deposit tag and DOI are written by hand in seven places. A bump that
+# missed one document would leave that document citing an older archive with
+# nothing to say so, which no other gate would see.
+tmp = tempfile.mkdtemp()
+try:
+    for d in ("manuscript", "results", "docs", "figures", "src"):
+        if os.path.isdir(d):
+            shutil.copytree(d, os.path.join(tmp, d))
+    for f in ("CITATION.cff", "README.md"):
+        if os.path.isfile(f):
+            shutil.copy(f, os.path.join(tmp, f))
+    tp = os.path.join(tmp, "manuscript", "title_page.md")
+    body = io.open(tp, encoding="utf-8").read()
+    moved = re.sub(r"at tag v(\d+)\.(\d+)",
+                   lambda m: "at tag v%s.%d" % (m.group(1), int(m.group(2)) - 1),
+                   body, count=1)
+    if moved == body:
+        FAILURES.append("check_manuscript.py: the title page cites no deposit "
+                        "tag, so there was nothing to perturb")
+    else:
+        io.open(tp, "w", encoding="utf-8").write(moved)
+        expect_nonzero("check_manuscript.py deposit citation gate",
+                       [sys.executable, "src/check_manuscript.py",
+                        "manuscript/manuscript_v6.0.md"], cwd=tmp,
+                       saying="deposit citation: manuscript/title_page.md")
 finally:
     shutil.rmtree(tmp, ignore_errors=True)
 

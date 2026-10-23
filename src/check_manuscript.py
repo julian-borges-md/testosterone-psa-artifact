@@ -64,6 +64,13 @@ agrees with the computation and with itself.
    19 October rebuild calling a stacked figure side by side, because the alt
    text was the one artifact class no module read.
 
+13. Deposit citation concordance. The tag and DOI of the archival deposit are
+   written by hand in seven places across six files. Every one must name the
+   deposit recorded in docs/archive_snapshot.tsv, so a bump that missed a
+   document cannot leave the title page or the supplementary pointing at an
+   older deposit. src/bump_deposit_citation.py rewrites all seven from one
+   command.
+
 Journal limits are asserted on a documented basis. With --submission, the module
 additionally asserts that no unresolved placeholder remains; that gate is a
 submission precondition and deliberately does not run on every push, so that a
@@ -1001,6 +1008,71 @@ if _alts and os.path.isfile(_ALTFILE):
             fails.append("alt text: manuscript/figure_alt_text.md does not "
                          "carry the manuscript's description of Figure %s word "
                          "for word" % _num)
+
+# -- deposit citation concordance -------------------------------------------
+# One fact, the deposit this version of the work is archived as, is written out
+# by hand in seven places across six files. Gate 8 checks that the citation has
+# the shape of a version tag and gate 11 that the tag holds this manuscript;
+# neither checks that the seven agree with each other, so a bump that missed one
+# document would leave the title page or the supplementary pointing at an older
+# deposit with nothing to say so. The snapshot file is the single source: every
+# citation in a document that travels with the manuscript must name the tag and
+# the DOI recorded there. src/bump_deposit_citation.py rewrites all seven.
+#
+# The concept DOI is permitted wherever the same line says so, because it names
+# the series rather than a version. CITATION.cff keeps superseded identifiers by
+# design, so it is checked differently: the current deposit must be listed, and
+# listed before any other archived snapshot.
+_SNAP = os.path.join(ROOT, "docs", "archive_snapshot.tsv")
+if os.path.isfile(_SNAP):
+    _snap_tag = _snap_doi = None
+    for _line in open(_SNAP, encoding="utf-8"):
+        if _line.startswith("tag\t"):
+            _snap_tag = _line.split("\t")[1].strip()
+        elif _line.startswith("version_doi\t"):
+            _snap_doi = _line.split("\t")[1].strip()
+    n += 1
+    if not (_snap_tag and _snap_doi):
+        fails.append("deposit citation: docs/archive_snapshot.tsv names no tag "
+                     "or no version DOI, so the citations cannot be checked")
+    else:
+        _snap_num = _snap_doi.rsplit(".", 1)[-1]
+        for _rel in ("manuscript/manuscript_v6.0.md",
+                     "manuscript/supplementary_v6.0.md",
+                     "manuscript/title_page.md",
+                     "manuscript/cover_letter.md",
+                     "README.md"):
+            _p = os.path.join(ROOT, _rel)
+            if not os.path.isfile(_p):
+                continue
+            for _ln, _line in enumerate(open(_p, encoding="utf-8").read().split("\n"), 1):
+                for _t in re.findall(r"(?:at tag|\(version) (v\d+\.\d+)", _line):
+                    n += 1
+                    if _t != _snap_tag:
+                        fails.append("deposit citation: %s line %d cites tag %s, "
+                                     "the recorded deposit is %s"
+                                     % (_rel, _ln, _t, _snap_tag))
+                for _d in set(re.findall(r"zenodo\.(\d+)", _line)):
+                    n += 1
+                    if _d != _snap_num and "concept" not in _line.lower():
+                        fails.append("deposit citation: %s line %d cites "
+                                     "zenodo.%s, the recorded deposit is %s"
+                                     % (_rel, _ln, _d, _snap_doi))
+        _cff = os.path.join(ROOT, "CITATION.cff")
+        if os.path.isfile(_cff):
+            _c = open(_cff, encoding="utf-8").read()
+            _want = ("value: %s\n    description: Archived snapshot of version %s"
+                     % (_snap_doi, _snap_tag))
+            n += 1
+            if _want not in _c:
+                fails.append("deposit citation: CITATION.cff does not list %s as "
+                             "the archived snapshot of %s" % (_snap_doi, _snap_tag))
+            else:
+                n += 1
+                _all = re.findall(r"Archived snapshot of version (v\d+\.\d+)", _c)
+                if _all and _all[0] != _snap_tag:
+                    fails.append("deposit citation: CITATION.cff lists %s before "
+                                 "the current deposit %s" % (_all[0], _snap_tag))
 
 # -- submission gate: unresolved placeholders -------------------------------
 PLACEHOLDERS = re.findall(r"\[[A-Z][A-Z0-9_]{6,}\]", text)
