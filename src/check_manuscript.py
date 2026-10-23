@@ -56,6 +56,14 @@ agrees with the computation and with itself.
    checks that the citation has the shape of a tag; this checks that the tag
    holds this manuscript, which is the failure that actually occurred.
 
+12. Figure alt text. Every figure legend is followed by the description the
+   journal requires in the manuscript itself, the paste ready copy says the
+   same words, and the two claims a figure rebuild invalidates, the panel
+   layout and a signed axis range, are checked against the script that writes
+   the figure. The description written for the previous venue survived the
+   19 October rebuild calling a stacked figure side by side, because the alt
+   text was the one artifact class no module read.
+
 Journal limits are asserted on a documented basis. With --submission, the module
 additionally asserts that no unresolved placeholder remains; that gate is a
 submission precondition and deliberately does not run on every push, so that a
@@ -876,6 +884,123 @@ if os.path.isfile(TITLE_PAGE):
         elif int(_c.group(1).replace(",", "")) != _computed:
             fails.append("title page: states %s for %s, the manuscript gives %d"
                          % (_c.group(1), _label, _computed))
+
+# -- figure alt text --------------------------------------------------------
+# The journal requires alt text in the manuscript itself, directly under each
+# figure legend and prefixed "Alt text:". It also drifted. The description
+# written for the previous venue had Figure 1 as three side by side panels on an
+# axis from minus 0.2 to 0.2; the 19 October rebuild stacked the panels and
+# widened the axis to minus 0.26 to 0.26, and the description survived unchanged
+# because nothing read it. Four properties are asserted: every legend carries a
+# description, the counts of legends, descriptions and embedded files agree, the
+# paste ready copy says the same words, and the two claims a rebuild actually
+# invalidates, the panel layout and a signed axis range, still match the script
+# that writes the figure.
+ALT_PREFIX = "Alt text: "
+
+
+def _fig_block(stem):
+    """The part of a figure script that built one figure: from the previous
+    figure's write to this figure's own. make_figures.py writes four."""
+    if not os.path.isdir(_figdir):
+        return None, None
+    for fn in sorted(os.listdir(_figdir)):
+        if not fn.endswith(".py"):
+            continue
+        s = open(os.path.join(_figdir, fn), encoding="utf-8").read()
+        here = re.search(r"savefig\(['\"]figures/%s\." % re.escape(stem), s)
+        if not here:
+            continue
+        prev = 0
+        for m in re.finditer(r"savefig\(['\"]figures/([A-Za-z0-9_]+)\.", s):
+            if m.start() >= here.start():
+                break
+            if m.group(1) != stem:
+                prev = m.end()
+        return fn, s[prev:here.start()]
+    return None, None
+
+
+_parts = text.split("**Figure legends**", 1)
+_alts = []
+if len(_parts) == 2:
+    _lines = _parts[1].split("\n")
+    _embeds = re.findall(r"!\[\]\(([A-Za-z0-9_]+)\.png\)", _parts[1])
+    _nfig = len(set(re.findall(r"\*\*Figure (\d+)[.,]", text)))
+    for _i, _ln in enumerate(_lines):
+        _m = re.match(r"^\*\*Figure (\d+)\.", _ln)
+        if not _m:
+            continue
+        n += 1
+        _alt = ""
+        for _j in range(_i + 1, min(_i + 4, len(_lines))):
+            if _lines[_j].startswith("**Figure "):
+                break
+            if _lines[_j].startswith(ALT_PREFIX):
+                _alt = _lines[_j][len(ALT_PREFIX):]
+                break
+        if not _alt:
+            fails.append("alt text: the legend for Figure %s carries no '%s' "
+                         "paragraph, which the journal requires in the "
+                         "manuscript itself"
+                         % (_m.group(1), ALT_PREFIX.strip()))
+        else:
+            _alts.append((_m.group(1), _alt))
+    n += 1
+    if len(_alts) != _nfig:
+        fails.append("alt text: %d descriptions for %d figures"
+                     % (len(_alts), _nfig))
+    n += 1
+    if len(_embeds) != _nfig:
+        fails.append("alt text: %d figure files embedded for %d figures"
+                     % (len(_embeds), _nfig))
+
+    for (_num, _alt), _stem in zip(_alts, _embeds):
+        _fn, _blk = _fig_block(_stem)
+        n += 1
+        if _blk is None:
+            fails.append("alt text: no figure script writes %s.png, so the "
+                         "description of Figure %s cannot be checked against "
+                         "the figure" % (_stem, _num))
+            continue
+        _low = _alt.lower()
+        _sp = re.search(r"subplots\(\s*(\d+)\s*,\s*(\d+)", _blk)
+        if _sp:
+            _rows, _cols = int(_sp.group(1)), int(_sp.group(2))
+            n += 1
+            if _rows > 1 and _cols == 1 and (
+                    "stacked" not in _low or "side by side" in _low):
+                fails.append("alt text: %s draws Figure %s as %d panels stacked "
+                             "in one column; the description says otherwise"
+                             % (_fn, _num, _rows))
+            elif _cols > 1 and _rows == 1 and (
+                    "side by side" not in _low or "stacked" in _low):
+                fails.append("alt text: %s draws Figure %s as %d panels in one "
+                             "row; the description says otherwise"
+                             % (_fn, _num, _cols))
+        _lims = [(float(x), float(y)) for x, y in re.findall(
+            r"set_[xy]lim\(\s*(-?[\d.]+)\s*,\s*(-?[\d.]+)", _blk)]
+        for _a, _b in re.findall(r"minus ([\d.]+) to ([\d.]+)", _alt):
+            n += 1
+            _want = (-float(_a), float(_b))
+            if not any(abs(g[0] - _want[0]) < 1e-9 and abs(g[1] - _want[1]) < 1e-9
+                       for g in _lims):
+                fails.append("alt text: Figure %s is described as running from "
+                             "minus %s to %s; %s sets %s"
+                             % (_num, _a, _b, _fn,
+                                ", ".join("%g to %g" % g for g in _lims) or "no axis"))
+
+# The paste ready copy is not a second source. It must say the same words, so a
+# submission system field and the manuscript cannot describe different pictures.
+_ALTFILE = os.path.join(ROOT, "manuscript", "figure_alt_text.md")
+if _alts and os.path.isfile(_ALTFILE):
+    _af = open(_ALTFILE, encoding="utf-8").read()
+    for _num, _alt in _alts:
+        n += 1
+        if _alt not in _af:
+            fails.append("alt text: manuscript/figure_alt_text.md does not "
+                         "carry the manuscript's description of Figure %s word "
+                         "for word" % _num)
 
 # -- submission gate: unresolved placeholders -------------------------------
 PLACEHOLDERS = re.findall(r"\[[A-Z][A-Z0-9_]{6,}\]", text)

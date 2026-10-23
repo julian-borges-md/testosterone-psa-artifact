@@ -7,7 +7,7 @@
 | `STROBE-MR_checklist.md` | Completed reporting checklist |
 | `title_page.md` | Title, author, correspondence, word and display item counts |
 | `cover_letter.md` | Cover letter, venue neutral |
-| `figure_alt_text.md` | Alt text and legends for both display figures |
+| `figure_alt_text.md` | The alt text and legends for both display figures, lifted from the manuscript for a submission system that asks for them in a field. Not a second source: `src/check_manuscript.py` holds it word for word identical to the manuscript |
 | `build.sh` | Builds the Word versions with pandoc |
 
 ```bash

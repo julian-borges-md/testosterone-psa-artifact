@@ -1,11 +1,14 @@
 """Proves the assertion modules can fail.
 
-Two perturbations, each in a temporary copy so the tree is never touched.
+Five perturbations, each in a temporary copy so the tree is never touched.
 A module that cannot fail asserts nothing, so every module whose output is
 quoted as evidence needs a case here.
 
   verify.py           one committed estimate is altered
   check_manuscript.py one count on the title page is altered
+  check_manuscript.py a bounded share claim is restored to its unbounded wording
+  check_manuscript.py a figure's stated resolution is halved
+  check_manuscript.py a figure script is relaid out and its description is not
 """
 import io, os, re, shutil, subprocess, sys, tempfile
 import pandas as pd
@@ -132,6 +135,44 @@ try:
                        [sys.executable, "src/check_manuscript.py",
                         "manuscript/manuscript_v6.0.md"], cwd=tmp,
                        saying="figure: ")
+finally:
+    shutil.rmtree(tmp, ignore_errors=True)
+
+
+# -- check_manuscript.py: a figure relaid out, its description untouched ----
+# This is the failure that occurred. The 19 October rebuild stacked Figure 1's
+# three panels and the alt text went on calling them side by side, because the
+# alt text was the one artifact class no module read. The perturbation is on the
+# figure script rather than on the prose, so the case reproduces the real event:
+# a figure moves and the description does not follow.
+tmp = tempfile.mkdtemp()
+try:
+    for d in ("manuscript", "results", "docs", "figures", "src"):
+        if os.path.isdir(d):
+            shutil.copytree(d, os.path.join(tmp, d))
+    for f in ("CITATION.cff", "README.md"):
+        if os.path.isfile(f):
+            shutil.copy(f, os.path.join(tmp, f))
+    script, moved = None, None
+    for f in sorted(os.listdir(os.path.join(tmp, "figures"))):
+        if not f.endswith(".py"):
+            continue
+        p = os.path.join(tmp, "figures", f)
+        body = io.open(p, encoding="utf-8").read()
+        swapped = re.sub(r"subplots\(\s*3\s*,\s*1", "subplots(1, 3", body, count=1)
+        if swapped != body:
+            script, moved = p, swapped
+            break
+    if script is None:
+        FAILURES.append("check_manuscript.py: no figure script lays a figure "
+                        "out in one column, so there was nothing to perturb; "
+                        "update this case to the current layout")
+    else:
+        io.open(script, "w", encoding="utf-8").write(moved)
+        expect_nonzero("check_manuscript.py alt text gate",
+                       [sys.executable, "src/check_manuscript.py",
+                        "manuscript/manuscript_v6.0.md"], cwd=tmp,
+                       saying="the description says otherwise")
 finally:
     shutil.rmtree(tmp, ignore_errors=True)
 

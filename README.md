@@ -86,7 +86,7 @@ make verify
 |---|---|---|
 | [`src/verify.py`](src/verify.py) | Study level values re-derived from the committed result tables, including the Bayesian synthesis recomputed from the committed trial counts | 32 assertions, 7 recomputed and 25 transcribed |
 | [`src/verify_matrix.py`](src/verify_matrix.py) | Every cell of the Tables 2, 3 and 4 estimator matrices, re-derived from the committed harmonised variant level inputs rather than read from a table | 166 checks, 141 recomputed and 25 transcribed |
-| [`src/check_manuscript.py`](src/check_manuscript.py) | Every printed matrix value, bold marking, abstract value and estimator count in the manuscript, plus claim consistency, setting qualification, supplementary citation, figure concordance and the journal word limits | 125 manuscript values and gates |
+| [`src/check_manuscript.py`](src/check_manuscript.py) | Every printed matrix value, bold marking, abstract value and estimator count in the manuscript, plus claim consistency, setting qualification, supplementary citation, figure concordance, figure alt text and the journal word limits | 213 manuscript values and gates |
 
 `make selftest` proves the check can fail by perturbing a committed estimate and requiring a non-zero exit. The matrix module additionally carries two regression assertions for the MR RAPS overdispersion defect found in review: that the fitted overdispersion parameter is strictly positive, and that the MR RAPS standard error differs from the fixed effect IVW standard error by more than five percent, which is the signature of a dropped overdispersion term.
 
